@@ -3,30 +3,30 @@ package bookncafe;
 import java.time.LocalDate;
 
 public class Persona {
-	private String nombre;
-	private String apellido;
+	private String nombres;
+	private String apellidos;
 	private int edad;
 	private LocalDate fechaNac;
 	private String email;
-	public Persona(String nombre, String apellido, int edad, LocalDate fechaNac, String email) {
+	public Persona(String nombres, String apellidos, int edad, LocalDate fechaNac, String email) {
 		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
 		this.edad = edad;
 		this.fechaNac = fechaNac;
 		this.email = email;
 	}
 	public String getNombre() {
-		return nombre;
+		return nombres;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombres) {
+		this.nombres = nombres;
 	}
 	public String getApellido() {
-		return apellido;
+		return apellidos;
 	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellido(String apellidos) {
+		this.apellidos = apellidos;
 	}
 	public int getEdad() {
 		return edad;
@@ -48,7 +48,7 @@ public class Persona {
 	}
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", fechaNac=" + fechaNac
+		return "Persona [nombre=" + nombres + ", apellido=" + apellidos + ", edad=" + edad + ", fechaNac=" + fechaNac
 				+ ", email=" + email + "]";
 	}
 	
