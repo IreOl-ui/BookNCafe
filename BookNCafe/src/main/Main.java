@@ -1,4 +1,4 @@
-package bookncafe;
+package main;
 
 public class Main {
 
