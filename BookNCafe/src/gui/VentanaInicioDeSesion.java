@@ -2,17 +2,19 @@ package gui;
 
 import javax.swing.JFrame;
 
-public class MainWindow extends JFrame {
+public class VentanaInicioDeSesion extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	
-	public MainWindow() { 
+
+	public VentanaInicioDeSesion() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Title");
-		setSize(450, 450);
+		setTitle("Iniciar sesión");
+		setSize(350, 300);
 		setLocationRelativeTo(null);
+		
+		// ...
 		
 		setVisible(true);
 	}
-	
+
 }

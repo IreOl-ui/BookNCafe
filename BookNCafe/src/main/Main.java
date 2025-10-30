@@ -1,12 +1,12 @@
 package main;
 
-import gui.MainWindow;
+import gui.VentanaInicioDeSesion;
 
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new MainWindow();
+		new VentanaInicioDeSesion();
 	}
 	
 	
