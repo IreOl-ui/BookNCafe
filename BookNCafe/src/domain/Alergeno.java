@@ -7,7 +7,7 @@ public enum Alergeno {
     PESCADO,
     CACAHUETES,
     SOJA,
-    LACTEOS,          
+    LÁCTEOS,          
     FRUTOS_SECOS,
     APIO,
     MOSTAZA,

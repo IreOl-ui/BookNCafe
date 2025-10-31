@@ -1,28 +1,28 @@
 tipo;nombre;personaje;precio;descripcion;alergeno;alcohol
-Bebida;El Susurrador;Jay Gatsby - El Gran Gatsby (F. Scott Fitzgerald);7.5;CÛctel de vodka para las fiestas de West Egg;sulfitos;Si
-Bebida;PociÛn de Avalon;Morgana Le Fay - Leyendas Art˙ricas (Thomas Malory);5;CÛctel de mora para la hechicera de leyenda;NUL;No
-Bebida;Dulce Venganza;Hedda Gabler - Hedda Gabler (Henrik Ibsen);4;Batido de fresa para un espÌritu indomable;l·cteos, frutos_secos;No
-Bebida;El Buscador;Odiseo - La Odisea (Homero);7.5;CÛctel de ginebra para un viaje Èpico;sulfitos;Si
-Bebida;Reflejos de Cristal;Dorian Gray - El Retrato de Dorian Gray (Oscar Wilde);4;Batido de frutos del bosque para el eterno joven;l·cteos, frutos_secos;No
-Bebida;Ronda del Corsario;Long John Silver - La Isla del Tesoro (Robert Louis Stevenson);7.5;Ron para el lobo de mar m·s astuto;sulfitos;Si
-Bebida;Fuego y Sangre;Daenerys Targaryen - Juego de Tronos (George R.R. Martin);5;CÛctel de especias para la madre de dragones;NUL;No
-Bebida;El Rastreador;Sherlock Holmes - Las Aventuras de Sherlock Holmes (Arthur Conan Doyle);5;CÛctel de ginebra para agudizar el ingenio;NUL;Si
-Bebida;Laberinto del Tiempo;El Doctor - Doctor Who (Varios autores);5;CÛctel de cereza para viajar en el tiempo;NUL;No
-Dulce;PasiÛn en la BretÒa;Emma Bovary - Madame Bovary (Gustave Flaubert);4.5;Tarta red velvet para un corazÛn rom·ntico;l·cteos, huevo;
+Bebida;El Susurrador;Jay Gatsby - El Gran Gatsby (F. Scott Fitzgerald);7.5;C√≥ctel de vodka para las fiestas de West Egg;sulfitos;Si
+Bebida;Poci√≥n de Avalon;Morgana Le Fay - Leyendas Arturicas (Thomas Malory);5;C√≥ctel de mora para la hechicera de leyenda;NUL;No
+Bebida;Dulce Venganza;Hedda Gabler - Hedda Gabler (Henrik Ibsen);4;Batido de fresa para un espiritu indomable;l√°cteos, frutos_secos;No
+Bebida;El Buscador;Odiseo - La Odisea (Homero);7.5;C√≥ctel de ginebra para un viaje √©pico;sulfitos;Si
+Bebida;Reflejos de Cristal;Dorian Gray - El Retrato de Dorian Gray (Oscar Wilde);4;Batido de frutos del bosque para el eterno joven;l√°cteos, frutos_secos;No
+Bebida;Ronda del Corsario;Long John Silver - La Isla del Tesoro (Robert Louis Stevenson);7.5;Ron para el lobo de mar m√°s astuto;sulfitos;Si
+Bebida;Fuego y Sangre;Daenerys Targaryen - Juego de Tronos (George R.R. Martin);5;C√≥ctel de especias para la madre de dragones;NUL;No
+Bebida;El Rastreador;Sherlock Holmes - Las Aventuras de Sherlock Holmes (Arthur Conan Doyle);5;C√≥ctel de ginebra para agudizar el ingenio;NUL;Si
+Bebida;Laberinto del Tiempo;El Doctor - Doctor Who (Varios autores);5;C√≥ctel de cereza para viajar en el tiempo;NUL;No
+Dulce;Pasi√≥n en la Bret√±a;Emma Bovary - Madame Bovary (Gustave Flaubert);4.5;Tarta red velvet para un coraz√≥n rom√°ntico;l√°cteos, huevo;
 Dulce;Ingenio y Sociedad;Elizabeth Bennet - Orgullo y Prejuicio (Jane Austen);2.5;Donut glaseado para una mente brillante;huevo;
-Dulce;El Gigante;Jean Valjean - Los Miserables (Victor Hugo);5.2;Tarta de chocolate y galleta para el hombre redimido;l·cteos, huevo, frutos_secos;
-Dulce;Flecha del Destino;Robin Hood - Leyendas de Robin Hood (Folclore inglÈs);2.1;Galletas para el arquero de Sherwood;huevo;
-Dulce;Velo de Seda;Anna KarÈnina - Anna KarÈnina (LeÛn TolstÛi);4.2;Tarta de fresa y nata para una elegancia tr·gica;l·cteos, huevo;
-Dulce;Fuerza de la Naturaleza;Capit·n Ahab - Moby Dick (Herman Melville);2.1;Croissant de crema para la obsesiÛn desmedida;l·cteos, huevo;
-Dulce;…poca de Inocencia;Scout Finch - Matar a un RuiseÒor (Harper Lee);1.7;Donut glaseado para la justicia infantil;huevo;
-Dulce;SueÒos de un Hombre RidÌculo;RaskÛlnikov - Crimen y Castigo (FiÛdor Dostoievski);3.6;Crepe de pistacho para la mente atormentada;l·cteos, huevo, frutos_secos;
-Dulce;El Viejo y el Mar;Santiago - El Viejo y el Mar (Ernest Hemingway);4.7;Tarta de queso para la determinaciÛn eterna;l·cteos, huevo;
-Salado;Honor y Prejuicio;Mr. Darcy - Orgullo y Prejuicio (Jane Austen);6.36;Empanada de espinacas para el caballero reservado;l·cteos, huevo;
-Salado;Isla del Tesoro;Robinson Crusoe - Robinson Crusoe (Daniel Defoe);4.8;Nachos con verduras para el superviviente n·ufrago;NUL;
-Salado;El Fiel Amigo;Sancho Panza - Don Quijote de la Mancha (Miguel de Cervantes);6.25;S·ndwich cl·sico para el compaÒero leal;l·cteos;
-Salado;Viaje a la Luna;Jules Verne - De la Tierra a la Luna (Julio Verne);7.5;Bocadillo especial para el soÒador de lo imposible;l·cteos;
-Salado;Rugido de RebeliÛn;Tyrion Lannister - Juego de Tronos (George R.R. Martin);7.2;Bocadillo de carne para el estratega indomable;l·cteos;
-Salado;Niebla y Misterio;HÈrcules Poirot - Asesinato en el Orient Express (Agatha Christie);6.4;S·ndwich mixto para el detective meticuloso;l·cteos;
+Dulce;El Gigante;Jean Valjean - Los Miserables (Victor Hugo);5.2;Tarta de chocolate y galleta para el hombre redimido;l√°cteos, huevo, frutos_secos;
+Dulce;Flecha del Destino;Robin Hood - Leyendas de Robin Hood (Folclore ingl√©s);2.1;Galletas para el arquero de Sherwood;huevo;
+Dulce;Velo de Seda;Anna Kar√©nina - Anna Kar√©nina (Le√≥n Tolst√≥i);4.2;Tarta de fresa y nata para una elegancia tr√°gica;l√°cteos, huevo;
+Dulce;Fuerza de la Naturaleza;Capit√°n Ahab - Moby Dick (Herman Melville);2.1;Croissant de crema para la obsesi√≥n desmedida;l√°cteos, huevo;
+Dulce;√©poca de Inocencia;Scout Finch - Matar a un Ruise√±or (Harper Lee);1.7;Donut glaseado para la justicia infantil;huevo;
+Dulce;Sue√±os de un Hombre Rid√culo;Rask√≥lnikov - Crimen y Castigo (Fi√≥dor Dostoievski);3.6;Crepe de pistacho para la mente atormentada;l√°cteos, huevo, frutos_secos;
+Dulce;El Viejo y el Mar;Santiago - El Viejo y el Mar (Ernest Hemingway);4.7;Tarta de queso para la determinaci√≥n eterna;l√°cteos, huevo;
+Salado;Honor y Prejuicio;Mr. Darcy - Orgullo y Prejuicio (Jane Austen);6.36;Empanada de espinacas para el caballero reservado;l√°cteos, huevo;
+Salado;Isla del Tesoro;Robinson Crusoe - Robinson Crusoe (Daniel Defoe);4.8;Nachos con verduras para el superviviente n√°ufrago;NUL;
+Salado;El Fiel Amigo;Sancho Panza - Don Quijote de la Mancha (Miguel de Cervantes);6.25;S√°ndwich cl√°sico para el compa√±ero leal;l√°cteos;
+Salado;Viaje a la Luna;Jules Verne - De la Tierra a la Luna (Julio Verne);7.5;Bocadillo especial para el so√±ador de lo imposible;l√°cteos;
+Salado;Rugido de Rebeli√≥n;Tyrion Lannister - Juego de Tronos (George R.R. Martin);7.2;Bocadillo de carne para el estratega indomable;l√°cteos;
+Salado;Niebla y Misterio;H√©rcules Poirot - Asesinato en el Orient Express (Agatha Christie);6.4;S√°ndwich mixto para el detective meticuloso;l√°cteos;
 Salado;La Gata;Lisbeth Salander - Los Hombres que no Amaban a las Mujeres (Stieg Larsson);3.2;Perrito caliente para la justiciera implacable;NUL;
-Salado;Magia de Verona;Romeo - Romeo y Julieta (William Shakespeare);6.6;S·ndwich de remolacha para el amor prohibido;huevo;
-Salado;Orgullo y PasiÛn;Heathcliff - Cumbres Borrascosas (Emily BrontÎ);3.3;Bagel de salmÛn para el alma atormentada;l·cteos, pescado;
+Salado;Magia de Verona;Romeo - Romeo y Julieta (William Shakespeare);6.6;S√°ndwich de remolacha para el amor prohibido;huevo;
+Salado;Orgullo y Pasi√≥n;Heathcliff - Cumbres Borrascosas (Emily Bronte);3.3;Bagel de salm√≥n para el alma atormentada;l√°cteos, pescado;
