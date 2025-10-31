@@ -1,5 +1,18 @@
 package domain;
 
-public class Alergeno {
-
+public enum Alergeno {
+    GLUTEN,           
+    CRUSTACEOS,       
+    HUEVO,
+    PESCADO,
+    CACAHUETES,
+    SOJA,
+    LACTEOS,          
+    FRUTOS_SECOS,
+    APIO,
+    MOSTAZA,
+    SESAMO,           
+    SULFITOS,
+    ALTRAMUCES,
+    MOLUSCOS
 }
