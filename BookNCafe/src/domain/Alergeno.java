@@ -11,7 +11,7 @@ public enum Alergeno {
     FRUTOS_SECOS,
     APIO,
     MOSTAZA,
-    SESAMO,           
+    SÉSAMO,           
     SULFITOS,
     ALTRAMUCES,
     MOLUSCOS
