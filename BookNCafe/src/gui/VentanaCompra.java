@@ -7,7 +7,10 @@ import java.util.Set;
 import domain.Producto;
 
 public class VentanaCompra extends JFrame {
-    private CarritoPanel carritoPanel;
+	
+	private static final long serialVersionUID = 1L;
+	
+	private CarritoPanel carritoPanel;
 
     public VentanaCompra(Set<Producto> productos) {
         mostrarBarraDeProgreso(productos);
