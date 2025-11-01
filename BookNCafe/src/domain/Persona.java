@@ -1,17 +1,23 @@
  package domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Persona {
 	private String nombre;
 	private String apellido;
+	private int DNI;
+	public enum Genero{
+		MASCULINO, FEMENINO
+	}
 	private int edad;
 	private LocalDate fechaNac;
 	private String email;
-	public Persona(String nombre, String apellido, int edad, LocalDate fechaNac, String email) {
+	public Persona(String nombre, String apellido, int dNI, int edad, LocalDate fechaNac, String email) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
+		DNI = dNI;
 		this.edad = edad;
 		this.fechaNac = fechaNac;
 		this.email = email;
@@ -27,6 +33,12 @@ public class Persona {
 	}
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+	public int getDNI() {
+		return DNI;
+	}
+	public void setDNI(int dNI) {
+		DNI = dNI;
 	}
 	public int getEdad() {
 		return edad;
@@ -48,7 +60,23 @@ public class Persona {
 	}
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", fechaNac=" + fechaNac
-				+ ", email=" + email + "]";
+		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", DNI=" + DNI + ", edad=" + edad
+				+ ", fechaNac=" + fechaNac + ", email=" + email + "]";
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(DNI, email);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		return DNI == other.DNI && Objects.equals(email, other.email);
+	}
+	
 }
