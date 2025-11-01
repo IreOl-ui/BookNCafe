@@ -1,0 +1,28 @@
+tipo;nombre;personaje;precio;descripcion;alergeno;alcohol
+Bebida;El Susurrador;Jay Gatsby - El Gran Gatsby (F. Scott Fitzgerald);7.5;Cóctel de vodka para las fiestas de West Egg;sulfitos;Si
+Bebida;Poción de Avalon;Morgana Le Fay - Leyendas Arturicas (Thomas Malory);5;Cóctel de mora para la hechicera de leyenda;NUL;No
+Bebida;Dulce Venganza;Hedda Gabler - Hedda Gabler (Henrik Ibsen);4;Batido de fresa para un espiritu indomable;lácteos, frutos_secos;No
+Bebida;El Buscador;Odiseo - La Odisea (Homero);7.5;Cóctel de ginebra para un viaje épico;sulfitos;Si
+Bebida;Reflejos de Cristal;Dorian Gray - El Retrato de Dorian Gray (Oscar Wilde);4;Batido de frutos del bosque para el eterno joven;lácteos, frutos_secos;No
+Bebida;Ronda del Corsario;Long John Silver - La Isla del Tesoro (Robert Louis Stevenson);7.5;Ron para el lobo de mar más astuto;sulfitos;Si
+Bebida;Fuego y Sangre;Daenerys Targaryen - Juego de Tronos (George R.R. Martin);5;Cóctel de especias para la madre de dragones;NUL;No
+Bebida;El Rastreador;Sherlock Holmes - Las Aventuras de Sherlock Holmes (Arthur Conan Doyle);5;Cóctel de ginebra para agudizar el ingenio;NUL;Si
+Bebida;Laberinto del Tiempo;El Doctor - Doctor Who (Varios autores);5;Cóctel de cereza para viajar en el tiempo;NUL;No
+Dulce;Pasión en la Bretña;Emma Bovary - Madame Bovary (Gustave Flaubert);4.5;Tarta red velvet para un corazón romántico;lácteos, huevo;
+Dulce;Ingenio y Sociedad;Elizabeth Bennet - Orgullo y Prejuicio (Jane Austen);2.5;Donut glaseado para una mente brillante;huevo;
+Dulce;El Gigante;Jean Valjean - Los Miserables (Victor Hugo);5.2;Tarta de chocolate y galleta para el hombre redimido;lácteos, huevo, frutos_secos;
+Dulce;Flecha del Destino;Robin Hood - Leyendas de Robin Hood (Folclore inglés);2.1;Galletas para el arquero de Sherwood;huevo;
+Dulce;Velo de Seda;Anna Karénina - Anna Karénina (León Tolstói);4.2;Tarta de fresa y nata para una elegancia trágica;lácteos, huevo;
+Dulce;Fuerza de la Naturaleza;Capitán Ahab - Moby Dick (Herman Melville);2.1;Croissant de crema para la obsesión desmedida;lácteos, huevo;
+Dulce;Época de Inocencia;Scout Finch - Matar a un Ruiseñor (Harper Lee);1.7;Donut glaseado para la justicia infantil;huevo;
+Dulce;Sueños de un Hombre Ridiculo;Raskólnikov - Crimen y Castigo (Fiódor Dostoievski);3.6;Crepe de pistacho para la mente atormentada;lácteos, huevo, frutos_secos;
+Dulce;El Viejo y el Mar;Santiago - El Viejo y el Mar (Ernest Hemingway);4.7;Tarta de queso para la determinación eterna;lácteos, huevo;
+Salado;Honor y Prejuicio;Mr. Darcy - Orgullo y Prejuicio (Jane Austen);6.36;Empanada de espinacas para el caballero reservado;lácteos, huevo;
+Salado;Isla del Tesoro;Robinson Crusoe - Robinson Crusoe (Daniel Defoe);4.8;Nachos con verduras para el superviviente náufrago;NUL;
+Salado;El Fiel Amigo;Sancho Panza - Don Quijote de la Mancha (Miguel de Cervantes);6.25;Sándwich clásico para el compañero leal;lácteos;
+Salado;Viaje a la Luna;Jules Verne - De la Tierra a la Luna (Julio Verne);7.5;Bocadillo especial para el soñador de lo imposible;lácteos;
+Salado;Rugido de Rebelión;Tyrion Lannister - Juego de Tronos (George R.R. Martin);7.2;Bocadillo de carne para el estratega indomable;lácteos;
+Salado;Niebla y Misterio;Hércules Poirot - Asesinato en el Orient Express (Agatha Christie);6.4;Sándwich mixto para el detective meticuloso;lácteos;
+Salado;La Gata;Lisbeth Salander - Los Hombres que no Amaban a las Mujeres (Stieg Larsson);3.2;Perrito caliente para la justiciera implacable;NUL;
+Salado;Magia de Verona;Romeo - Romeo y Julieta (William Shakespeare);6.6;Sándwich de remolacha para el amor prohibido;huevo;
+Salado;Orgullo y Pasión;Heathcliff - Cumbres Borrascosas (Emily Bronte);3.3;Bagel de salmón para el alma atormentada;lácteos, pescado;
