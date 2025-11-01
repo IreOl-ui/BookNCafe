@@ -29,7 +29,7 @@ public class VentanaCompra extends JFrame {
                 int totalPasos = productos.size();
                 int pasoActual = 0;
 
-                // Simular carga de productos (puedes usar lógica real aquí)
+                // Simular carga de productos
                 for (Producto producto : productos) {
                     // Simular un pequeño retraso por producto
                     Thread.sleep(50);
@@ -51,7 +51,7 @@ public class VentanaCompra extends JFrame {
 
             @Override
             protected void done() {
-                dialogoCarga.dispose(); // Cerrar el diálogo al completar la tarea
+                dialogoCarga.dispose(); // Cerrar al completar la tarea
             }
         };
 
