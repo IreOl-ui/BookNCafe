@@ -13,7 +13,8 @@ public class Persona {
 	private int edad;
 	private LocalDate fechaNac;
 	private String email;
-	public Persona(String nombre, String apellido, int dNI, int edad, LocalDate fechaNac, String email) {
+	private int tlf;
+	public Persona(String nombre, String apellido, int dNI, int edad, LocalDate fechaNac, String email, int tlf) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -21,6 +22,7 @@ public class Persona {
 		this.edad = edad;
 		this.fechaNac = fechaNac;
 		this.email = email;
+		this.tlf = tlf;
 	}
 	public String getNombre() {
 		return nombre;
@@ -58,14 +60,20 @@ public class Persona {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public int getTlf() {
+		return tlf;
+	}
+	public void setTlf(int tlf) {
+		this.tlf = tlf;
+	}
 	@Override
 	public String toString() {
 		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", DNI=" + DNI + ", edad=" + edad
-				+ ", fechaNac=" + fechaNac + ", email=" + email + "]";
+				+ ", fechaNac=" + fechaNac + ", email=" + email + ", tlf=" + tlf + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(DNI, email);
+		return Objects.hash(DNI, email, tlf);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -76,7 +84,7 @@ public class Persona {
 		if (getClass() != obj.getClass())
 			return false;
 		Persona other = (Persona) obj;
-		return DNI == other.DNI && Objects.equals(email, other.email);
+		return DNI == other.DNI && Objects.equals(email, other.email) && tlf == other.tlf;
 	}
 	
 }
