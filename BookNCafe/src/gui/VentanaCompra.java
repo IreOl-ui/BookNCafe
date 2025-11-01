@@ -7,15 +7,12 @@ import java.util.Set;
 import domain.Producto;
 
 public class VentanaCompra extends JFrame {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private CarritoPanel carritoPanel;
+    private CarritoPanel carritoPanel;
 
     public VentanaCompra(Set<Producto> productos) {
         mostrarBarraDeProgreso(productos);
     }
-
+ 
     private void mostrarBarraDeProgreso(Set<Producto> productos) {
         JDialog dialogoCarga = new JDialog(this, "Cargando Productos...", true);
         JProgressBar barraProgreso = new JProgressBar(0, 100); // Barra con valores de 0 a 100
