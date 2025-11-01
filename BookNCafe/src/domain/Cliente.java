@@ -9,7 +9,8 @@ public class Cliente {
 	private String apellido;
 	private int DNI;
 	public enum Genero{
-		MASCULINO, FEMENINO
+		MASCULINO,
+		FEMENINO
 	}
 	private int edad;
 	private LocalDate fechaNac;
