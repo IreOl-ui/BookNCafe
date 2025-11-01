@@ -8,19 +8,18 @@ public class Cliente {
 	private String nombre;
 	private String apellido;
 	private int DNI;
-	public enum Genero{
-		MASCULINO,
-		FEMENINO
-	}
+	private Genero genero;
 	private int edad;
 	private LocalDate fechaNac;
 	private String email;
 	private int tlf;
-	public Cliente(String nombre, String apellido, int dNI, int edad, LocalDate fechaNac, String email, int tlf) {
+	public Cliente(String nombre, String apellido, int dNI, Genero genero, int edad, LocalDate fechaNac, String email,
+			int tlf) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		DNI = dNI;
+		this.genero = genero;
 		this.edad = edad;
 		this.fechaNac = fechaNac;
 		this.email = email;
@@ -43,6 +42,12 @@ public class Cliente {
 	}
 	public void setDNI(int dNI) {
 		DNI = dNI;
+	}
+	public Genero getGenero() {
+		return genero;
+	}
+	public void setGenero(Genero genero) {
+		this.genero = genero;
 	}
 	public int getEdad() {
 		return edad;
@@ -70,8 +75,8 @@ public class Cliente {
 	}
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", DNI=" + DNI + ", edad=" + edad
-				+ ", fechaNac=" + fechaNac + ", email=" + email + ", tlf=" + tlf + "]";
+		return "Cliente [nombre=" + nombre + ", apellido=" + apellido + ", DNI=" + DNI + ", genero=" + genero
+				+ ", edad=" + edad + ", fechaNac=" + fechaNac + ", email=" + email + ", tlf=" + tlf + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -88,5 +93,5 @@ public class Cliente {
 		Cliente other = (Cliente) obj;
 		return DNI == other.DNI && Objects.equals(email, other.email) && tlf == other.tlf;
 	}
-
+	
 }
