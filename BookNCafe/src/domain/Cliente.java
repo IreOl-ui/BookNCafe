@@ -1,51 +1,91 @@
 package domain;
 
+import java.time.LocalDate;
+import java.util.Objects;
+
 public class Cliente {
 
-	private String DNI;
 	private String nombre;
-	private String telefono;
+	private String apellido;
+	private int DNI;
+	public enum Genero{
+		MASCULINO, FEMENINO
+	}
+	private int edad;
+	private LocalDate fechaNac;
 	private String email;
-
-	// constructor -> recibe datos del cliente
-	public Cliente(String telefono, String nombre, String DNI, String email) {
-		// asigna valor de DNI (parametro) al atributo de la clase
-		this.DNI = DNI;
-		// asigna valor de nombre (parametro) al atributo de la clase
+	private int tlf;
+	public Cliente(String nombre, String apellido, int dNI, int edad, LocalDate fechaNac, String email, int tlf) {
+		super();
 		this.nombre = nombre;
-		// asigna valor de telefono (parametro) al atributo de la clase
-		this.telefono = telefono;
-		// asigna valor de email (parametro) al atributo de la clase
+		this.apellido = apellido;
+		DNI = dNI;
+		this.edad = edad;
+		this.fechaNac = fechaNac;
 		this.email = email;
+		this.tlf = tlf;
 	}
-
-	// getters
-	// getter para obteber DNI
-	public String getDNI() {
-		return DNI;
-	}
-
-	// getter para obtener nombre
 	public String getNombre() {
 		return nombre;
 	}
-
-	// getter para obtener telefono
-	public String getTelefono() {
-		return telefono;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-
-	// getter para obteber email
-	public String getEmail() { // getter para obteber email
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	public int getDNI() {
+		return DNI;
+	}
+	public void setDNI(int dNI) {
+		DNI = dNI;
+	}
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+	public LocalDate getFechaNac() {
+		return fechaNac;
+	}
+	public void setFechaNac(LocalDate fechaNac) {
+		this.fechaNac = fechaNac;
+	}
+	public String getEmail() {
 		return email;
 	}
-
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public int getTlf() {
+		return tlf;
+	}
+	public void setTlf(int tlf) {
+		this.tlf = tlf;
+	}
 	@Override
-	// transforma los datos del cliente en String
 	public String toString() {
-		// devuelve cadena de texto con los datos del cliente separados por ";" (en
-		// formato .csv)
-		return telefono + ";" + nombre + ";" + DNI + ";" + email;
+		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", DNI=" + DNI + ", edad=" + edad
+				+ ", fechaNac=" + fechaNac + ", email=" + email + ", tlf=" + tlf + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(DNI, email, tlf);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return DNI == other.DNI && Objects.equals(email, other.email) && tlf == other.tlf;
 	}
 
 }
