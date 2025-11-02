@@ -22,8 +22,7 @@ public class VentanaPrincipal extends JFrame {
         setTitle("¡Bienvenid@, " + cliente.getNombre() + "!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        // Mostrar una barra de progreso durante la carga
+        
         cargarConBarraDeProgreso(cliente);
     }
 
@@ -41,8 +40,7 @@ public class VentanaPrincipal extends JFrame {
 
             @Override
             protected Set<Producto> doInBackground() throws Exception {
-                // Simular tareas de carga
-                Thread.sleep(500); // Simula la inicialización
+                Thread.sleep(500);
                 productos = GestionProductos.cargarProductosCSV();
                 return null;
             }
@@ -51,7 +49,7 @@ public class VentanaPrincipal extends JFrame {
             protected void done() {
                 dialogoCarga.dispose();
                 try {
-                	get(); // Captura cualquier excepción
+                	get(); // Get para capturar cualquier excepcion
                     inicializarVentanaPrincipal(productos, cliente);
                 } catch (InterruptedException | ExecutionException ex) {
                     JOptionPane.showMessageDialog(null, "Error al cargar datos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -65,14 +63,14 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void inicializarVentanaPrincipal(Set<Producto> productos, Cliente cliente) {
-        // Crear el panel de fondo
         FondoPanel fondoPanel = new FondoPanel("resources/images/iconos/Fondo.jpeg");
         fondoPanel.setLayout(new BorderLayout());
-
-        // Panel superior para el logo y botones
+        
+        // JPanel
         JPanel panelSuperior = new JPanel(new BorderLayout());
         panelSuperior.setOpaque(false);
 
+        // JLabel
         JLabel bienvenida = new JLabel("¡Hola, " + cliente.getNombre() + "!");
         bienvenida.setFont(new Font("Arial", Font.BOLD, 24));
         bienvenida.setHorizontalAlignment(SwingConstants.CENTER);
@@ -82,14 +80,13 @@ public class VentanaPrincipal extends JFrame {
         bienvenida.setBackground(new Color(255, 255, 255, 128));
 
         panelSuperior.add(bienvenida, BorderLayout.NORTH);
-
-        // Panel derecho con botones
+        
         JPanel panelSuperiorDerecho = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelSuperiorDerecho.setBackground(Color.WHITE);
 
+        // JButton de compra y perfil
         JButton btnCompras = crearBotonConIcono("resources/images/iconos/Compra.jpeg", "Compras", 64, 64);
         btnCompras.addActionListener(e -> new VentanaCompra(productos).setVisible(true));
-
         JButton btnPerfil = crearBotonConIcono("resources/images/iconos/Perfil.jpeg", "Perfil", 64, 64);
         btnPerfil.addActionListener(e -> new VentanaPerfil(cliente, new Perfil(cliente.getNombre(), "resources/images/Perfiles/" + cliente.getNombre() + ".jpg", 100.0)).setVisible(true));
 
@@ -109,6 +106,7 @@ public class VentanaPrincipal extends JFrame {
         Image imagenRedimensionada = iconoOriginal.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
 
+        // JButton
         JButton boton = new JButton(iconoRedimensionado);
         boton.setToolTipText(toolTip);
         boton.setFocusPainted(false);

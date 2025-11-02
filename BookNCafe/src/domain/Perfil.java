@@ -11,45 +11,36 @@ public class Perfil {
     private String fotoPerfil;
     private double dineroGastado;
     private Color colorBorde;
-
-    // Constructor que inicializa todos los atributos
     public Perfil(String nombre, String fotoPerfil, double dineroGastado) {
         this.nombre = nombre;
         this.fotoPerfil = fotoPerfil;
         this.dineroGastado = dineroGastado;
         this.colorBorde = Color.WHITE; // Color predeterminado
-        cargarColorBorde(); // Intentamos cargar el color de borde desde un archivo
+        // E intentemos cargar el color de borde desde un archivo
+        cargarColorBorde();
     }
-
-    // Getter para obtener el nombre
     public String getNombre() {
         return nombre;
     }
-
-    // Getter para obtener el color del borde
     public Color getColorBorde() {
         return colorBorde;
     }
-
-    public String getFotoPerfilPath() {
+    public String getFotoPerfil() {
 		return fotoPerfil;
 	}
-
-	public void setFotoPerfilPath(String fotoPerfilPath) {
-		this.fotoPerfil = fotoPerfilPath;
+	public void setFotoPerfil(String fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
 	}
-
-	// Setter para establecer el color del borde
     public void setColorBorde(Color colorBorde) {
         this.colorBorde = colorBorde;
-        guardarColorBorde(); // Guardamos el color de borde cuando se cambia
+        // Guardamos el color de borde cuando se cambia
+        guardarColorBorde();
     }
-
-    // Método para calcular los puntos
     public int calcularPuntos() {
         return (int) (dineroGastado * 5);
     }
 
+    // Métodos:
     // Guardar el color del borde en un archivo
     private void guardarColorBorde() {
         Properties propiedades = new Properties();
@@ -61,7 +52,6 @@ public class Perfil {
             e.printStackTrace();
         }
     }
-
     // Cargar el color de borde desde el archivo
     private void cargarColorBorde() {
         Properties propiedades = new Properties();
