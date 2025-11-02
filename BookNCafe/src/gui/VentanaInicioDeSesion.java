@@ -22,10 +22,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField; 
 
 import domain.Cliente; 
-import io.GestionClientes; 
-import domain.ContraCliente;
-import domain.Perfil;
-import io.GestionContraClientes; 
+import io.GestionClientes;
+import io.GestionContraClientes;
+import domain.ContraCliente; 
 
 
 public class VentanaInicioDeSesion extends JFrame {
@@ -142,7 +141,7 @@ public class VentanaInicioDeSesion extends JFrame {
         // método para autenticar al usuario leyendo el archivo CSV
         private boolean autenticar(String username, String password) {
             String line;
-            try (BufferedReader br = new BufferedReader(new FileReader("resources/data/contraseñasClientes.csv"))) {
+            try (BufferedReader br = new BufferedReader(new FileReader("resources/data/contraClientes.csv"))) {
                 // Instancia temporal para acceder al método encriptarContraseña
             	ContraCliente tempCliente = new ContraCliente("", password);
                 String passwordEncriptada = tempCliente.getContraseñaEncriptada(); // Encripta la contraseña ingresada
@@ -178,8 +177,11 @@ public class VentanaInicioDeSesion extends JFrame {
                 // Cerrar la ventana de inicio de sesión
                 this.dispose();  // Cierra la ventana de login (Inicio de sesión)
 
-                // Crear y mostrar la ventana principal -- TODAVIA SIN HACER (HACERLAS O DEJAMOS PARA LA FASE 2)
-                
+                // Crear y mostrar la ventana principal
+                GestionClientes gestionClientes = new GestionClientes();
+                Cliente cliente = gestionClientes.obtenerClientePorNombre(usuarioLogueado);
+                VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(cliente);
+                ventanaPrincipal.setVisible(true);  // Muestra la ventana principal
             } else {
                 // Si las credenciales no son correctas, mostrar un mensaje
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
@@ -200,7 +202,7 @@ public class VentanaInicioDeSesion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Crear un cliente genérico para el usuario invitado
-                Cliente clienteInvitado = new Cliente("Invitado", "", "", "", "");
+                Cliente clienteInvitado = new Cliente("Invitado", "", "", "");
 
                 // Cerrar la ventana de inicio de sesión
                 LoginFrame.this.dispose();
@@ -262,7 +264,7 @@ public class VentanaInicioDeSesion extends JFrame {
             // etiqueta y campo de Email
             gbc.gridy++; // fila (suma 1)
             gbc.gridx = 0; // columna (se restablece)
-            add(new JLabel("Email:"), gbc); // añade la etiqueta "Email:"
+            add(new JLabel("DNI:"), gbc); // añade la etiqueta "Email:"
             gbc.gridx = 1; // cambia la fila a 1
             emailField = new JTextField(15); // campo de texto para el email
             add(emailField, gbc); // añade el campo de texto
@@ -270,7 +272,7 @@ public class VentanaInicioDeSesion extends JFrame {
             // etiqueta y campo de DNI
             gbc.gridy++; // fila (suma 1)
             gbc.gridx = 0; // columna (se restablece)
-            add(new JLabel("DNI:"), gbc); // añade la etiqueta "DNI:"
+            add(new JLabel("Email:"), gbc); // añade la etiqueta "DNI:"
             gbc.gridx = 1; // cambia la fila a 1
             dniField = new JTextField(15); // campo de texto para el DNI
             add(dniField, gbc); // añade el campo de texto
@@ -310,7 +312,6 @@ public class VentanaInicioDeSesion extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // obtiene los valores introducidos por el usuario
                 String nombre = nameField.getText();
-                String apellido = nameField.getText();
                 String dni = dniField.getText();
                 String email = emailField.getText();
                 String tlf = phoneField.getText();
@@ -318,7 +319,7 @@ public class VentanaInicioDeSesion extends JFrame {
 
                 // guardar datos cliente (DNI;NOMBRE;EMAIL;TELEFONO)
                 // crea una instancia de Cliente con los datos ingresados
-                Cliente cliente = new Cliente(nombre, apellido, dni, email, tlf);
+                Cliente cliente = new Cliente(nombre, dni, email, tlf);
 
                 // Ruta de la imagen predeterminada
                 String rutaImagenPredeterminada = "resources/images/Perfiles/Invitado.jpg"; 
@@ -351,7 +352,7 @@ public class VentanaInicioDeSesion extends JFrame {
 
                 // crea una instancia de GestionContraseñasClientes y guardar la contraseña
                 GestionContraClientes gestionContraseñasClientes = new GestionContraClientes();
-                gestionContraseñasClientes.guardarContraseñaCliente(contraseñaCliente);
+                gestionContraseñasClientes.guardarContraCliente(contraseñaCliente);
 
                 // mensaje de confirmación
                 JOptionPane.showMessageDialog(RegisterFrame.this, "Registro exitoso para " + nombre);
@@ -359,8 +360,9 @@ public class VentanaInicioDeSesion extends JFrame {
                 // Cerrar la ventana de registro
                 dispose();
 
-                // Abrir la ventana principal con el perfil del cliente registrado -- AÚN NO ESTÁ HECHA
-                
+                // Abrir la ventana principal con el perfil del cliente registrado
+                VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(cliente);  // Pasar el cliente y perfil registrado
+                ventanaPrincipal.setVisible(true);  // Mostrar la ventana principal
             }
         }
     }
