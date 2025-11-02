@@ -1,27 +1,17 @@
 package domain;
 
-import java.time.LocalDate;
-import java.util.Objects;
-
 public class Cliente {
 
 	private String nombre;
 	private String apellido;
-	private int DNI;
-	private Genero genero;
-	private int edad;
-	private LocalDate fechaNac;
+	private String dni;
 	private String email;
-	private int tlf;
-	public Cliente(String nombre, String apellido, int dNI, Genero genero, int edad, LocalDate fechaNac, String email,
-			int tlf) {
+	private String tlf;
+	public Cliente(String nombre, String apellido, String dni, String email, String tlf) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		DNI = dNI;
-		this.genero = genero;
-		this.edad = edad;
-		this.fechaNac = fechaNac;
+		this.dni = dni;
 		this.email = email;
 		this.tlf = tlf;
 	}
@@ -37,29 +27,11 @@ public class Cliente {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public int getDNI() {
-		return DNI;
+	public String getDNI() {
+		return dni;
 	}
-	public void setDNI(int dNI) {
-		DNI = dNI;
-	}
-	public Genero getGenero() {
-		return genero;
-	}
-	public void setGenero(Genero genero) {
-		this.genero = genero;
-	}
-	public int getEdad() {
-		return edad;
-	}
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}
-	public LocalDate getFechaNac() {
-		return fechaNac;
-	}
-	public void setFechaNac(LocalDate fechaNac) {
-		this.fechaNac = fechaNac;
+	public void setDNI(String dni) {
+		this.dni = dni;
 	}
 	public String getEmail() {
 		return email;
@@ -67,31 +39,15 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getTlf() {
+	public String getTlf() {
 		return tlf;
 	}
-	public void setTlf(int tlf) {
+	public void setTlf(String tlf) {
 		this.tlf = tlf;
 	}
 	@Override
 	public String toString() {
-		return "Cliente [nombre=" + nombre + ", apellido=" + apellido + ", DNI=" + DNI + ", genero=" + genero
-				+ ", edad=" + edad + ", fechaNac=" + fechaNac + ", email=" + email + ", tlf=" + tlf + "]";
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(DNI, email, tlf);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cliente other = (Cliente) obj;
-		return DNI == other.DNI && Objects.equals(email, other.email) && tlf == other.tlf;
+		return nombre + ";" + apellido + ";" + dni + ";" + email + ";" + tlf + "]";
 	}
 	
 }
