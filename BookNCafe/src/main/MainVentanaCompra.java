@@ -23,10 +23,7 @@ public class MainVentanaCompra {
             new VentanaCompra(productos);
         });
     }
-    
-    /**
-     * Método auxiliar para cargar los productos desde el CSV
-     */
+
     private static Set<Producto> cargarProductos() {
         return GestionProductos.cargarProductosCSV();
     }
