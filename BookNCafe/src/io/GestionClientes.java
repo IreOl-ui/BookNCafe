@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Cliente;
+import gui.VentanaPerfil;
 
 public class GestionClientes {
     public static final Path ruta_archivo_clientes = Paths.get("resources", "data", "clientes.csv"); // Ruta del archivo CSV
@@ -79,14 +80,13 @@ public class GestionClientes {
             br.readLine(); // Saltar la cabecera del CSV
             while ((linea = br.readLine()) != null) {
                 String[] campos = linea.split(";");
-                if (campos.length == 8) {                    
+                if (campos.length == 4) {                    
                     String nombre = campos[0].trim();
-                	String apellido = campos[1].trim();
-                	String DNI = campos[2].trim();
-                	String email = campos[6].trim();
-                	String tlf = campos[7].trim();
+                	String DNI = campos[1].trim();
+                	String email = campos[2].trim();
+                	String tlf = campos[3].trim();
 
-                    Cliente c = new Cliente(nombre, apellido, DNI, email, tlf);
+                    Cliente c = new Cliente(nombre, DNI, email, tlf);
                     clientes.add(c);
                 }
             }

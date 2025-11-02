@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 
 import domain.Cliente;
 import gui.VentanaInicioDeSesion;
+import gui.VentanaPrincipal;
 import io.GestionClientes;
 
 public class MainVentanaInicioDeSesion {
@@ -20,6 +21,8 @@ public class MainVentanaInicioDeSesion {
                 Cliente cliente = gestionClientes.obtenerClientePorNombre(usuarioLogueado); // Aquí se obtiene el cliente
 
                 // Y después crear y mostrar la ventana principal
+                VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(cliente);
+                ventanaPrincipal.setVisible(true);
             }
         });
 	}

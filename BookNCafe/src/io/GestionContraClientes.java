@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import domain.ContraCliente;
 
 public class GestionContraClientes {
-    public static final Path ruta_archivo_clientes = Paths.get("resources", "data", "contraseñasClientes.csv");
+    public static final Path ruta_archivo_clientes = Paths.get("resources", "data", "contraClientes.csv");
 
     public GestionContraClientes() {
         try {
@@ -21,14 +21,14 @@ public class GestionContraClientes {
             File archivoContraseñasClientes = ruta_archivo_clientes.toFile();
             if (!archivoContraseñasClientes.exists()) {
                 archivoContraseñasClientes.createNewFile();
-                System.out.println("Archivo contraseñasClientes.csv creado en: " + ruta_archivo_clientes.toString());
+                System.out.println("Archivo contraClientes.csv creado en: " + ruta_archivo_clientes.toString());
             }
         } catch (IOException e) {
             System.out.println("No se pudo crear el archivo o directorio de clientes");
         }
     }
 
-    public void guardarContraseñaCliente(ContraCliente cliente) {
+    public void guardarContraCliente(ContraCliente cliente) {
         try (BufferedReader reader = new BufferedReader(new FileReader(ruta_archivo_clientes.toFile()))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
