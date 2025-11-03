@@ -5,7 +5,8 @@ import java.awt.*;
 
 import domain.Libro;
 import domain.GestionLibros;
-import io.Tickets;   
+import io.Tickets;
+import io.GestionReservasLibro;
 public class VentanaReservarLibro extends JFrame {
 
     private JTextField txtIsbn;
