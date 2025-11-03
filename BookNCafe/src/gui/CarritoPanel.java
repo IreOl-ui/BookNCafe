@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import domain.Producto;
+import io.Tickets; 
 
 public class CarritoPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -63,6 +64,30 @@ public class CarritoPanel extends JPanel {
         pagarButton.addActionListener(e -> realizarPago());
         add(Box.createVerticalStrut(10));
         add(pagarButton);
+     // Botón para generar ticket
+        JButton ticketButton = new JButton("Generar ticket");
+        ticketButton.setAlignmentX(CENTER_ALIGNMENT);
+        ticketButton.addActionListener(e -> {
+            if (carrito.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El carrito está vacío.");
+                return;
+            }
+
+            String nombre = JOptionPane.showInputDialog(this, "Nombre del cliente:");
+            if (nombre == null || nombre.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe escribir un nombre.");
+                return;
+            }
+
+            // Usamos la clase Tickets para guardar el ticket
+            Tickets.guardarTicketPedido(carrito, total, nombre);
+
+            JOptionPane.showMessageDialog(this, "Ticket generado correctamente.\nRevisa el archivo ticket_pedido.txt");
+        });
+
+        add(Box.createVerticalStrut(10)); 
+        add(ticketButton);
+
     }
 
     public void agregarProducto(Producto producto) {
