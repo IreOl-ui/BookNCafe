@@ -4,17 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
-
-
 import domain.Producto;
 
 public class Tickets {
 
-    //ticket del carro
+    // ticket pedido
     public static void guardarTicketPedido(Map<Producto, Integer> carrito, double total, String nombreCliente) {
         try {
-            
-            String nombreArchivo = "ticket_pedido_" + System.currentTimeMillis() + ".txt";
+            String nombreArchivo = "ticket_pedido.txt";  
 
             PrintWriter pw = new PrintWriter(new FileWriter(nombreArchivo));
 
@@ -24,7 +21,6 @@ public class Tickets {
             pw.println("Cliente: " + nombreCliente);
             pw.println("");
 
-            // recorremos el carro
             for (Map.Entry<Producto, Integer> entrada : carrito.entrySet()) {
                 Producto p = entrada.getKey();
                 int cantidad = entrada.getValue();
@@ -35,7 +31,6 @@ public class Tickets {
             pw.println("----------------------");
             pw.println("TOTAL: " + total + " €");
             pw.println("Gracias por su compra!");
-
             pw.close();
 
             System.out.println("Ticket guardado en: " + nombreArchivo);
@@ -45,11 +40,11 @@ public class Tickets {
         }
     }
 
-    // ticket reserva
+    // ticket resrva
     public static void guardarTicketReserva(String id, String nombreCliente, String mesa,
                                             String fecha, String hora, String estado) {
         try {
-            String nombreArchivo = "ticket_reserva_" + System.currentTimeMillis() + ".txt";
+            String nombreArchivo = "ticket_reserva.txt"; 
 
             PrintWriter pw = new PrintWriter(new FileWriter(nombreArchivo));
 
@@ -73,3 +68,4 @@ public class Tickets {
         }
     }
 }
+
