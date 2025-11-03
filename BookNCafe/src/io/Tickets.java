@@ -67,5 +67,30 @@ public class Tickets {
             System.out.println("Error al guardar el ticket: " + e.getMessage());
         }
     }
+ // ticket libro
+ 
+    public static void guardarTicketReservaLibro(String isbn, String titulo, String autor, String nombreCliente) {
+        try {
+            String nombreArchivo = "ticket_reserva_libro.txt";
+            PrintWriter pw = new PrintWriter(new FileWriter(nombreArchivo));
+
+            pw.println("=== BOOK N' CAFE ===");
+            pw.println("TICKET DE RESERVA DE LIBRO");
+            pw.println("--------------------------");
+            pw.println("Cliente: " + nombreCliente);
+            pw.println("ISBN: " + isbn);
+            pw.println("Título: " + titulo);
+            pw.println("Autor: " + autor);
+            pw.println("--------------------------");
+            pw.println("Presente este ticket al recoger el libro.");
+            pw.close();
+
+            System.out.println("Ticket guardado en: " + nombreArchivo);
+        } catch (Exception e) {
+            System.out.println("Error al guardar el ticket: " + e.getMessage());
+        }
+    }
+
+
 }
 

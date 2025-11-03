@@ -2,10 +2,10 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+
 import domain.Libro;
 import domain.GestionLibros;
-
+import io.Tickets;   
 public class VentanaReservarLibro extends JFrame {
 
     private JTextField txtIsbn;
@@ -41,12 +41,39 @@ public class VentanaReservarLibro extends JFrame {
         JPanel panelBotones = new JPanel();
         btnReservar = new JButton("Reservar");
         btnCancelar = new JButton("Cancelar");
+        JButton btnTicket = new JButton("Generar ticket");
+
+        panelBotones.add(btnTicket);
         panelBotones.add(btnReservar);
         panelBotones.add(btnCancelar);
         add(panelBotones, BorderLayout.SOUTH);
 
+        
         btnReservar.addActionListener(e -> reservarLibro());
         btnCancelar.addActionListener(e -> dispose());
+
+        // gen ticket
+        btnTicket.addActionListener(e -> {
+            String isbn = txtIsbn.getText().trim();
+            String titulo = txtTitulo.getText().trim();
+            String autor = txtAutor.getText().trim();
+
+            if (isbn.isEmpty() || titulo.isEmpty() || autor.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos antes de generar el ticket.");
+                return;
+            }
+
+            String nombreCliente = JOptionPane.showInputDialog(this, "Nombre del cliente:");
+            if (nombreCliente == null || nombreCliente.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe escribir un nombre.");
+                return;
+            }
+
+           
+            Tickets.guardarTicketReservaLibro(isbn, titulo, autor, nombreCliente);
+
+            JOptionPane.showMessageDialog(this, "Ticket generado.\nArchivo: ticket_reserva_libro.txt");
+        });
     }
 
     private void reservarLibro() {
