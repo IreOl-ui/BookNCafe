@@ -66,6 +66,6 @@ public class GestionContraClientes {
         } catch (IOException e) {
             System.out.println("Ha ocurrido un error al buscar el cliente.");
         }
-        return null;
+        return null; // Si no encuentro cliente, simplemente devuelve null.
     }
 }
