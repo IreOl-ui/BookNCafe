@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GestionParticipantes {
 
-    private static final Path CSV_FILE = Paths.get("resources", "data", "participantes.csv");
+    private static final Path CSV_FILE = Paths.get("resources", "data", "participantes1.csv");
 
     // Constructor para crear el archivo si no existe
     public GestionParticipantes() {
@@ -49,66 +49,5 @@ public class GestionParticipantes {
         }
         return participantes;
     }
-
-    // Guardar un participante en el CSV, verificando que no se repita
-    public static void guardarParticipante(Participante participante) {
-        // Verificar si el participante ya existe en el archivo
-        if (existeParticipante(participante)) {
-            System.out.println("El participante ya está registrado en el concurso.");
-            return;  // No guardar el participante si ya existe
-        }
-
-        // Si no existe, agregarlo al archivo CSV
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE.toFile(), true))) {
-            String participanteInfo = participante.getNombre() + ";" + participante.getApellido() + ";" + participante.getTelefono() + "\n";
-            writer.write(participanteInfo);
-            System.out.println("Participante guardado correctamente.");
-        } catch (IOException e) {
-            System.err.println("Error al guardar el participante: " + e.getMessage());
-        }
-    }
-
-    // Método para verificar si un participante ya existe en el archivo
-    private static boolean existeParticipante(Participante participante) {
-        List<Participante> participantes = cargarParticipantesCSV(); // Cargar todos los participantes
-        for (Participante p : participantes) {
-            // Si el nombre, apellido y teléfono coinciden, se considera duplicado
-            if (p.getNombre().equals(participante.getNombre()) && p.getApellido().equals(participante.getApellido()) && p.getTelefono().equals(participante.getTelefono())) {
-                return true;  // El participante ya existe
-            }
-        }
-        return false;  // El participante no existe
-    }
-    
-    public static List<Participante> cargarParticipantesConCalificaciones() {
-        List<Participante> participantes = new ArrayList<>();
-        String rutaCSV = "resources/data/calificacionesConcurso.csv";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(rutaCSV))) {
-            String linea;
-            br.readLine(); // Saltar encabezado
-
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(";");
-                String nombre = datos[0];
-                String apellido = datos[1];
-                String telefono = datos[2];
-                double creatividad = Double.parseDouble(datos[3]);
-                double material = Double.parseDouble(datos[4]);
-                double tecnica = Double.parseDouble(datos[5]);
-
-                Participante participante = new Participante(nombre, apellido, telefono);
-                participante.agregarCalificacion("creatividad", creatividad);
-                participante.agregarCalificacion("material", material);
-                participante.agregarCalificacion("tecnica", tecnica);
-
-                participantes.add(participante);
-            }
-
-        } catch (IOException e) {
-            System.err.println("Error al leer el archivo de calificaciones: " + e.getMessage());
-        }
-
-        return participantes;
-    }
 }
+
