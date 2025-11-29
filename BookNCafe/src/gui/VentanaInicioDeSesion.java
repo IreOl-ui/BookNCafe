@@ -147,7 +147,7 @@ public class VentanaInicioDeSesion extends JFrame {
                 VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(cliente);
                 ventanaPrincipal.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -163,7 +163,7 @@ public class VentanaInicioDeSesion extends JFrame {
         private class GuestButtonListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	// Cliente generañ
+            	// Cliente general
                 Cliente clienteInvitado = new Cliente("Invitado", "", "", "");
                 
                 LoginFrame.this.dispose();
@@ -187,10 +187,10 @@ public class VentanaInicioDeSesion extends JFrame {
         private JPasswordField passwordField;
 
         public RegisterFrame() {
-            setTitle("Registro Nuevo Cliente"); // título de la ventana
-            setSize(400, 400); // tamaño de la ventana
-            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // cierra solo la ventana de registro al cerrar
-            setLocationRelativeTo(null); // centra la ventana en la pantalla
+            setTitle("Registro Nuevo Cliente");
+            setSize(400, 400);
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLocationRelativeTo(null);
             
             // Layouts
             setLayout(new GridBagLayout());
