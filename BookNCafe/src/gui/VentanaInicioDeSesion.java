@@ -136,7 +136,7 @@ public class VentanaInicioDeSesion extends JFrame {
             String password = new String(passwordField.getPassword());
 
             // Si la autenticación es correcta, abre la ventana principal
-            if (usuarioLogueado != null && password != null) {
+            if (usuarioLogueado.isEmpty() && password.isEmpty()) {
             	JOptionPane.showMessageDialog(this, "No se puede iniciar la sesión.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
             } else if (autenticar(usuarioLogueado, password)) {
                 this.dispose();
