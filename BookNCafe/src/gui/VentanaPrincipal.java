@@ -89,9 +89,14 @@ public class VentanaPrincipal extends JFrame {
         btnCompras.addActionListener(e -> new VentanaCompra(productos).setVisible(true));
         JButton btnPerfil = crearBotonConIcono("resources/images/iconos/Perfil.jpeg", "Perfil", 64, 64);
         btnPerfil.addActionListener(e -> new VentanaPerfil(cliente, new Perfil(cliente.getNombre(), "resources/images/Perfiles/" + cliente.getNombre() + ".jpg", 100.0)).setVisible(true));
+        JButton btnConcurso = crearBotonConIcono("resources/images/iconos/Trofeo.jpeg", "Concurso", 64, 64);
+        JButton btnReservas = crearBotonConIcono("resources/images/iconos/Reservas.jpeg", "Reservas", 64, 64);
+        btnReservas.addActionListener(e -> new VentanaReservarSitio().setVisible(true));
 
         panelSuperiorDerecho.add(btnCompras);
         panelSuperiorDerecho.add(btnPerfil);
+        panelSuperiorDerecho.add(btnConcurso);
+        panelSuperiorDerecho.add(btnReservas);
 
         panelSuperior.add(panelSuperiorDerecho, BorderLayout.EAST);
         fondoPanel.add(panelSuperior, BorderLayout.NORTH);
