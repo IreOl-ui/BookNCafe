@@ -23,7 +23,7 @@ public class ConcursoPanel extends JPanel {
             panel.setLayout(new BorderLayout());
 
             // Cargar la imagen del dibujo
-            ImageIcon imagen = new ImageIcon("resources/images/Concurso/" + participante.getNombre() + participante.getApellido() + ".jpeg");
+            ImageIcon imagen = new ImageIcon("resources/images/Concurso/" + participante.getNombre() + participante.getApellido() + ".jpg");
             imagen = ProductoPanel.redimensionarImagen(imagen, 400, 400);
             JLabel imagenLabel = new JLabel(imagen);
             panel.add(imagenLabel, BorderLayout.CENTER);

@@ -16,35 +16,34 @@ public class VentanaSubirConcurso extends JFrame {
     public VentanaSubirConcurso() {
         setTitle("Subir tu Foto");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(380, 400);  // Ajusté el tamaño de la ventana
+        setSize(380, 400);  
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout(10, 10)); // Espaciado reducido
 
         // Instrucciones en la parte superior
-        JLabel instruccionesLabel = new JLabel("<html><center>Ingrese su nombre, apellido y teléfono.<br>Luego seleccione una imagen para participar.<br>La imagen debe ser en formato jpeg y ser nombrada con su nombre y apellido, así: NombreApellido.<br>El ganador será obsequiado con un cheque de 50€ para gastar en la cafetería y un vaso con su dibujo.</center></html>", SwingConstants.CENTER);
-        instruccionesLabel.setFont(new Font("Arial", Font.BOLD, 13));  // Tamaño de fuente para visibilidad
+        JLabel instruccionesLabel = new JLabel("<html><center>Ingrese su nombre, apellido y teléfono.<br>Luego seleccione una imagen para participar.<br>La imagen debe ser en formato jpg y ser nombrada con su nombre y apellido, así: NombreApellido.<br>El ganador será obsequiado con un cheque de 60€ para gastar en la cafetería y un vaso con su dibujo.</center></html>", SwingConstants.CENTER);
+        instruccionesLabel.setFont(new Font("Arial", Font.BOLD, 13));  
         instruccionesLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // Crear los componentes para ingresar nombre, apellido y teléfono
+        // Crear los componentes para meter nombre, apellido y teléfono
         JPanel panelFormulario = new JPanel();
-        panelFormulario.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10)); // Usar FlowLayout con espaciado entre componentes
-        panelFormulario.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Reducción de márgenes
+        panelFormulario.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10)); 
+        panelFormulario.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
 
         // Campos de texto ajustados para ser más pequeños
         JTextField nombreField = new JTextField();
-        nombreField.setFont(new Font("Arial", Font.PLAIN, 13));  // Tamaño de fuente ajustado
+        nombreField.setFont(new Font("Arial", Font.PLAIN, 13));  
         nombreField.setBorder(new TitledBorder("Nombre"));
-        nombreField.setPreferredSize(new Dimension(325, 50));  // Ajustar el tamaño del campo
+        nombreField.setPreferredSize(new Dimension(325, 50));  
 
         JTextField apellidoField = new JTextField();
         apellidoField.setFont(new Font("Arial", Font.PLAIN, 13));
         apellidoField.setBorder(new TitledBorder("Apellido"));
-        apellidoField.setPreferredSize(new Dimension(325, 50));  // Ajustar el tamaño del campo
+        apellidoField.setPreferredSize(new Dimension(325, 50));  
 
         JTextField telefonoField = new JTextField();
         telefonoField.setFont(new Font("Arial", Font.PLAIN, 13));
         telefonoField.setBorder(new TitledBorder("Teléfono"));
-        telefonoField.setPreferredSize(new Dimension(325, 50));  // Ajustar el tamaño del campo
+        telefonoField.setPreferredSize(new Dimension(325, 50));  
 
         // Añadir los campos al panel del formulario
         panelFormulario.add(nombreField);
@@ -67,7 +66,7 @@ public class VentanaSubirConcurso extends JFrame {
             if (seleccion == JFileChooser.APPROVE_OPTION) {
                 File archivoSeleccionado = fileChooser.getSelectedFile();
                 String nombreCompleto = nombreField.getText().replace(" ", "_") + apellidoField.getText().replace(" ", "_");
-                String rutaDestino = "resources/images/Concurso/" + nombreCompleto + ".jpeg";
+                String rutaDestino = "resources/images/Concurso/" + nombreCompleto + ".jpg";
 
                 try {
                     Files.copy(archivoSeleccionado.toPath(), Paths.get(rutaDestino), StandardCopyOption.REPLACE_EXISTING);
@@ -86,8 +85,8 @@ public class VentanaSubirConcurso extends JFrame {
         });
 
         // Añadir el botón al panel inferior
-        JPanel panelBoton = new JPanel();  // Panel para el botón
-        panelBoton.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // Alineación centrada
+        JPanel panelBoton = new JPanel(); 
+        panelBoton.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); 
         panelBoton.add(btnSubirImagen);
 
         // Panel principal

@@ -34,12 +34,26 @@ public class VentanaConcurso extends JFrame {
         concursoPanel.setBackground(Color.WHITE);
         add(concursoPanel, BorderLayout.CENTER);
 
+        // Botón para subir una nueva imagen
+        JButton btnSubirImagen = new JButton("Sube tu foto");
+        btnSubirImagen.addActionListener(e -> {
+            VentanaSubirConcurso ventanaSubir = new VentanaSubirConcurso();
+            ventanaSubir.setVisible(true);
+        });
+
+        // Panel para colocar el botón en la parte superior
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.add(btnSubirImagen);
+        add(bottomPanel, BorderLayout.NORTH);
+        
+        setVisible(true);
         
         // Crear un JScrollPane para permitir desplazamiento
         JScrollPane scrollPane = new JScrollPane(concursoPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-   
+        // Añadir el JScrollPane a la ventana principal
         add(scrollPane);
     }
 }
+   
