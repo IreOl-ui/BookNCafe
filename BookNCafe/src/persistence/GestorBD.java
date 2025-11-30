@@ -26,7 +26,6 @@ public class GestorBD {
 	private final String CSV_CONTRA_CLIENTES = "resources/data/contraClientes.csv";
 	private final String CSV_MENU = "resources/data/menu.csv";
 	private final String CSV_RESERVAS = "resources/data/reservas.csv";
-	private final String CSV_PARTICIPANTES = "resources/data/participantes.csv";
 	
 	private Properties properties;
     private String driverName;
@@ -134,19 +133,12 @@ public class GestorBD {
                 + "nombre_cliente VARCHAR(100), "
                 + "tipo_evento VARCHAR(100), "
                 + "FOREIGN KEY (nombre_cliente) REFERENCES clientes(nombre));";
-		// -- Participantes
-		String createParticipantesTable = "CREATE TABLE IF NOT EXISTS participantes ("
-                + "nombre VARCHAR(100), "
-                + "apellidos VARCHAR(100), "
-                + "numero INT, "
-                + "FOREIGN KEY (nombre_cliente) REFERENCES clientes(nombre));";
 		
         try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
         	stmt.executeUpdate(createClientesTable);
             stmt.executeUpdate(createMenuTable);
             stmt.executeUpdate(createCalificacionesConcursoTable);
             stmt.executeUpdate(createReservasTable);
-            stmt.executeUpdate(createParticipantesTable);
             
             // Crear index (índices)
             stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_nombre_cliente ON clientes(nombre);");
@@ -166,7 +158,6 @@ public class GestorBD {
         cargarDatosDesdeCSV(CSV_MENU, "menu", true);
         cargarDatosDesdeCSV(CSV_CALIFICACIONES_CONCURSO, "calificaciones_concurso", true);
         cargarDatosDesdeCSV(CSV_RESERVAS, "reservas", false);
-        cargarDatosDesdeCSV(CSV_PARTICIPANTES, "participantes", true);
 	}
 
 	private void cargarContrasenasClientes() {
@@ -211,8 +202,6 @@ public class GestorBD {
                 break;
             case "reservas":
                 sql = "INSERT INTO reservas (fecha, nombre_cliente, tipo_evento) VALUES (?, ?, ?)";
-            case "participantes":
-                sql = "INSERT INTO participantes (nombre, apellidos, tlf) VALUES (?, ?, ?)";
                 break;
             default:
                 log.severe("Tabla no reconocida: " + tabla);
