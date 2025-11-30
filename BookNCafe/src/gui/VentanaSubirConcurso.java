@@ -12,8 +12,10 @@ import java.nio.file.*;
 import java.nio.file.StandardCopyOption;
 
 public class VentanaSubirConcurso extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
 
-    public VentanaSubirConcurso() {
+	public VentanaSubirConcurso() {
         setTitle("Subir tu Foto");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(380, 400);  

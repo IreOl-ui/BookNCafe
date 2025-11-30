@@ -9,7 +9,10 @@ import java.awt.*;
 import java.util.List;
 
 public class VentanaConcurso extends JFrame {  
-    private List<Participante> participantes;  // Declara una lista privada de objetos 'Participante' que almacena los participantes del concurso
+	
+	private static final long serialVersionUID = 1L;
+	
+	private List<Participante> participantes;  // Declara una lista privada de objetos 'Participante' que almacena los participantes del concurso
 
     // Constructor de la clase VentanaConcurso
     public VentanaConcurso(List<Participante> participantes) {
