@@ -20,9 +20,11 @@ import java.util.logging.Logger;
 public class GestorBD {
 	
 	private final String PROPERTIES_FILE = "resources/data/clientes.csv";
+	private final String CSV_CALIFICACIONES_CONCURSO = "resources/data/calificacionesConcurso.csv";
 	private final String CSV_CLIENTES = "resources/data/clientes.csv";
 	private final String CSV_CONTRA_CLIENTES = "resources/data/contraClientes.csv";
 	private final String CSV_MENU = "resources/data/menu.csv";
+	private final String CSV_RESERVAS = "resources/data/reservas.csv";
 	
 	private Properties properties;
     private String driverName;
@@ -114,18 +116,34 @@ public class GestorBD {
                 + "descripcion TEXT, "
                 + "alergeno VARCHAR(200), "
                 + "alcohol VARCHAR(3));";
-		
-		// Falta crear calificaciones y reservas, para esto más tarde... //
+		// -- Calificaciones
+		String createCalificacionesConcursoTable = "CREATE TABLE IF NOT EXISTS calificaciones_concurso ("
+                + "nombre VARCHAR(100), "
+                + "apellido VARCHAR(100), "
+                + "telefono VARCHAR(15), "
+                + "creatividad FLOAT, "
+                + "material FLOAT, "
+                + "tecnica FLOAT, "
+                + "promedio_general FLOAT, "
+                + "PRIMARY KEY (telefono));";
+		// -- Reservas
+		String createReservasTable = "CREATE TABLE IF NOT EXISTS reservas ("
+                + "fecha DATE PRIMARY KEY, "
+                + "nombre_cliente VARCHAR(100), "
+                + "tipo_evento VARCHAR(100), "
+                + "FOREIGN KEY (nombre_cliente) REFERENCES clientes(nombre));";
 		
         try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
         	stmt.executeUpdate(createClientesTable);
             stmt.executeUpdate(createMenuTable);
+            stmt.executeUpdate(createCalificacionesConcursoTable);
+            stmt.executeUpdate(createReservasTable);
             
             // Crear index (índices)
             stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_nombre_cliente ON clientes(nombre);");
             stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_nombre ON menu(nombre);");
-            
-            // AÑADIR AQUI TMB CALIFICACIONES Y RESERVAS //
+            stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_telefono ON calificaciones_concurso(telefono);");
+            stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_fecha ON reservas(fecha);");
             
         } catch (Exception e) {
             log.severe("Error al crear las tablas: " + e.getMessage());
@@ -137,6 +155,8 @@ public class GestorBD {
         cargarDatosDesdeCSV(CSV_CLIENTES, "clientes", true);
         cargarContrasenasClientes(); // Cargar las contraseñas después de los clientes
         cargarDatosDesdeCSV(CSV_MENU, "menu", true);
+        cargarDatosDesdeCSV(CSV_CALIFICACIONES_CONCURSO, "calificaciones_concurso", true);
+        cargarDatosDesdeCSV(CSV_RESERVAS, "reservas", false);
 	}
 
 	private void cargarContrasenasClientes() {
@@ -218,9 +238,10 @@ public class GestorBD {
         }
 	}
 	
-	// Realizar consultas de BBDD
+	// Realizar consultas de BBDD clientes y calificaciones
 	public void realizarConsultas() {
         String consultaClientes = "SELECT * FROM clientes;";
+        String consultaCalificaciones = "SELECT nombre, apellido, promedio_general FROM calificaciones_concurso ORDER BY promedio_general DESC LIMIT 10;";
 
         try (Connection conn = connect();
         	Statement stmt = conn.createStatement()) {
@@ -228,16 +249,34 @@ public class GestorBD {
             while (rs.next()) {
                 System.out.println("Cliente: " + rs.getString("nombre"));
             }
+            rs = stmt.executeQuery(consultaCalificaciones);
+            while (rs.next()) {
+                System.out.println("Participante: " + rs.getString("nombre") + " " + rs.getString("apellido") + " - Promedio: " + rs.getFloat("promedio_general"));
+            }
         } catch (Exception e) {
             log.severe("Error al realizar consultas: " + e.getMessage());
         }
 	}
+	
+    // Actualizar promedio general de calificaciones.csv
+    public void actualizarPromedios() {
+        String updatePromedio = "UPDATE calificaciones_concurso "
+                + "SET promedio_general = (creatividad + material + tecnica) / 3;";
+
+        try (Connection conn = connect();
+        	Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(updatePromedio);
+        } catch (Exception e) {
+            log.severe("Error al actualizar los promedios: " + e.getMessage());
+        }
+    }
 
 	public static void main(String[] args) {
 		GestorBD gestor = new GestorBD();
 		gestor.crearTablasBD();
 		gestor.cargarBD();
         gestor.realizarConsultas();
+        gestor.actualizarPromedios();
 	}
 
 }
