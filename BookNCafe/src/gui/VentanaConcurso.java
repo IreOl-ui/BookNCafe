@@ -21,38 +21,25 @@ public class VentanaConcurso extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
 
-        setTitle("Concurso de Dibujo");  // Establece el título de la ventana como "Concurso de Dibujo"
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // Configura la operación de cierre para que al cerrar esta ventana se termine la aplicación
-        setSize(800, 600);  // Establece el tamaño de la ventana en 800 píxeles de ancho y 600 de alto
-        setLocationRelativeTo(null);  // Centra la ventana en la pantalla al abrirse
+        setTitle("Concurso de Dibujo");  
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
+        setSize(800, 600);  
+        setLocationRelativeTo(null); 
 
-        ConcursoPanel concursoPanel = new ConcursoPanel(participantes);  // Crea una instancia de 'ConcursoPanel', pasando la lista de participantes al panel
-        add(concursoPanel);  // Añade el panel de concurso a la ventana; se convierte en el contenido principal de esta ventana
+        ConcursoPanel concursoPanel = new ConcursoPanel(participantes); 
+        add(concursoPanel);  
 
         // Crear un panel para mostrar los participantes
         ConcursoPanel ConcursoPanel = new ConcursoPanel(participantes);
         concursoPanel.setBackground(Color.WHITE);
         add(concursoPanel, BorderLayout.CENTER);
 
-        // Botón para subir una nueva imagen
-        JButton btnSubirImagen = new JButton("Sube tu foto");
-        btnSubirImagen.addActionListener(e -> {
-            VentanaSubirConcurso ventanaSubir = new VentanaSubirConcurso();
-            ventanaSubir.setVisible(true);
-        });
-
-        // Panel para colocar el botón en la parte superior
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.add(btnSubirImagen);
-        add(bottomPanel, BorderLayout.NORTH);
-        
-        setVisible(true);
         
         // Crear un JScrollPane para permitir desplazamiento
         JScrollPane scrollPane = new JScrollPane(concursoPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        // Añadir el JScrollPane a la ventana principal
+   
         add(scrollPane);
     }
 }
