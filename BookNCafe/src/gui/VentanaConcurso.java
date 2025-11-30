@@ -29,11 +29,8 @@ public class VentanaConcurso extends JFrame {
         setSize(800, 600);  
         setLocationRelativeTo(null); 
 
-        ConcursoPanel concursoPanel = new ConcursoPanel(participantes); 
-        add(concursoPanel);  
-
         // Crear un panel para mostrar los participantes
-        ConcursoPanel ConcursoPanel = new ConcursoPanel(participantes);
+        ConcursoPanel concursoPanel = new ConcursoPanel(participantes);
         concursoPanel.setBackground(Color.WHITE);
         add(concursoPanel, BorderLayout.CENTER);
 
