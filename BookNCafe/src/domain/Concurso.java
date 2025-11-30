@@ -1,6 +1,6 @@
 package domain;
 
-import io.GestionParti;
+import io.GestionParticipantes;
 
 import java.io.*;
 import java.nio.file.*;
@@ -19,7 +19,7 @@ public class Concurso {
 
     // Método para cargar los participantes con calificaciones desde el archivo CSV
     public void cargarCalificacionesDesdeArchivo() {
-        this.participantes = GestionParti.cargarParticipantesConCalificaciones();
+        this.participantes = GestionParticipantes.cargarParticipantesConCalificaciones();
     }
 
     // Método para obtener el promedio más alto entre los participantes
