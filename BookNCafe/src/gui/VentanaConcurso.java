@@ -17,7 +17,7 @@ public class VentanaConcurso extends JFrame {
     // Constructor de la clase VentanaConcurso
     public VentanaConcurso(List<Participante> participantes) {
 
-        this.participantes = participantes;  // Asigna la lista de participantes pasada como argumento al atributo 'participantes'
+        this.participantes = participantes; 
         
         setTitle("Concurso de Dibujo");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
