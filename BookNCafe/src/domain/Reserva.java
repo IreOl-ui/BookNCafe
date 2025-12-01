@@ -33,5 +33,8 @@ public class Reserva {
     public boolean esHoy() {
         return fecha.equals(LocalDate.now());
     }
+    public void posponerUnDia() {
+        fecha = fecha.plusDays(1);
+    }
 }
 
