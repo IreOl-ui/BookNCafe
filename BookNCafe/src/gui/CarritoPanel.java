@@ -18,7 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import domain.Producto;
-import io.HistorialPedidos;   
+import io.HistorialPedidos;   // historial CSV
+import gui.VentanaTicket;    // ventana del ticket
 
 public class CarritoPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -139,11 +140,37 @@ public class CarritoPanel extends JPanel {
                 return;
             }
 
+            // Copias para ticket e historial ANTES de vaciar
+            Map<Producto, Integer> carritoCopia = new HashMap<>(carrito);
+            double totalCopia = total;
+
             JOptionPane.showMessageDialog(this, "Pago realizado. Total: " + String.format("%.2f€", total));
 
-         
-            HistorialPedidos.guardarPedido(new HashMap<>(carrito), total, nombreTitular);
-        
+            // Guardar en historial de pedidos (CSV)
+            HistorialPedidos.guardarPedido(carritoCopia, totalCopia, nombreTitular);
+
+            // Preguntar si quiere ver el ticket
+            int verTicket = JOptionPane.showConfirmDialog(
+                this,
+                "¿Desea ver el ticket del pedido?",
+                "Ticket",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (verTicket == JOptionPane.YES_OPTION) {
+                // Abrir ventana de ticket con todos los datos del comprador
+                VentanaTicket ventana = new VentanaTicket(
+                        carritoCopia,
+                        totalCopia,
+                        nombreTitular,
+                        numeroTarjeta,
+                        fechaVencimiento
+                );
+                
+                ventana.setVisible(true);
+            }
+
+            // Reiniciar carrito
             carrito.clear();
             total = 0.0;
             actualizarListaProductos();
