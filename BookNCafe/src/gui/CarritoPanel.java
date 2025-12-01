@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import domain.Producto;
+import io.HistorialPedidos;   
 
 public class CarritoPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -34,7 +35,7 @@ public class CarritoPanel extends JPanel {
         carrito = new HashMap<>();
         total = 0.0;
 
-        // Tabla
+        // Configuración de la tabla
         String[] columnNames = {"Producto", "Cantidad", "Precio"};
         tableModel = new DefaultTableModel(columnNames, 0);
         productosTable = new JTable(tableModel);
@@ -48,13 +49,11 @@ public class CarritoPanel extends JPanel {
 
         add(Box.createVerticalStrut(10));
 
-        // Total
         totalLabel = new JLabel("Total: 0.00€");
         totalLabel.setFont(new Font("Arial", Font.BOLD, 16));
         totalLabel.setAlignmentX(CENTER_ALIGNMENT);
         add(totalLabel);
 
-        // Botón pagar
         pagarButton = new JButton("Pagar");
         pagarButton.setAlignmentX(CENTER_ALIGNMENT);
         pagarButton.setEnabled(false);
@@ -92,7 +91,6 @@ public class CarritoPanel extends JPanel {
 
     private void realizarPago() {
 
-        // PANEL DE DATOS DE PAGO
         JPanel panelPago = new JPanel();
         panelPago.setLayout(new BoxLayout(panelPago, BoxLayout.Y_AXIS));
 
@@ -131,7 +129,6 @@ public class CarritoPanel extends JPanel {
             String fechaVencimiento = fechaVencimientoField.getText();
             String codigoSeguridad = codigoSeguridadField.getText();
 
-            // Validaciones básicas
             if (numeroTarjeta.isEmpty() || !esTarjetaValida(numeroTarjeta)) {
                 JOptionPane.showMessageDialog(this, "Número de tarjeta inválido.");
                 return;
@@ -142,35 +139,11 @@ public class CarritoPanel extends JPanel {
                 return;
             }
 
-            // 🔹 COPIAR CARRITO ANTES DE VACIARLO
-            Map<Producto, Integer> carritoParaTicket = new HashMap<>(carrito);
-            double totalParaTicket = total;
-
-            // Confirmar pago
             JOptionPane.showMessageDialog(this, "Pago realizado. Total: " + String.format("%.2f€", total));
 
-            // Pregunta si quiere ver el ticket
-            int verTicket = JOptionPane.showConfirmDialog(
-                this,
-                "¿Desea ver el ticket del pedido?",
-                "Ticket",
-                JOptionPane.YES_NO_OPTION
-            );
-
-            if (verTicket == JOptionPane.YES_OPTION) {
-
-                // 🔹 Ventana del ticket con todos los datos del comprador
-                VentanaTicket ventana = new VentanaTicket(
-                        carritoParaTicket,
-                        totalParaTicket,
-                        nombreTitular,
-                        numeroTarjeta,
-                        fechaVencimiento
-                );
-                ventana.setVisible(true);
-            }
-
-            //💡 Reiniciar carrito después del ticket
+         
+            HistorialPedidos.guardarPedido(new HashMap<>(carrito), total, nombreTitular);
+        
             carrito.clear();
             total = 0.0;
             actualizarListaProductos();
@@ -193,5 +166,6 @@ public class CarritoPanel extends JPanel {
         columnPrecio.setPreferredWidth(100);
     }
 }
+
 
 
