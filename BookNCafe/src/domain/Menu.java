@@ -67,7 +67,9 @@ public class Menu {
     public void setAlcohol(boolean alcohol) {
         this.alcohol = alcohol;
     }
-
+    public void aplicarDescuento(double porcentaje) {
+        this.precio = this.precio * (1 - porcentaje / 100);
+    }
     
 
 }
