@@ -22,7 +22,7 @@ public class VentanaSubirConcurso extends JFrame {
         setLocationRelativeTo(null);
 
         // Instrucciones en la parte superior
-        JLabel instruccionesLabel = new JLabel("<html><center>Ingrese su nombre, apellido y teléfono.<br>Luego seleccione una imagen para participar.<br>La imagen debe ser en formato jpg y ser nombrada con su nombre y apellido, así: NombreApellido.<br>El ganador será obsequiado con un cheque de 60€ para gastar en la cafetería y un vaso con su dibujo.</center></html>", SwingConstants.CENTER);
+        JLabel instruccionesLabel = new JLabel("<html><center>Ingrese su nombre, apellido y teléfono.<br>Luego seleccione una imagen para participar.<br>La imagen debe ser en formato jpg y ser nombrada con su nombre y apellido, así: NombreApellido.<br>El ganador será obsequiado con un cheque de 60€ para gastar en la cafetería y un vaso con su dibujo creado.</center></html>", SwingConstants.CENTER);
         instruccionesLabel.setFont(new Font("Arial", Font.BOLD, 13));  
         instruccionesLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
