@@ -70,7 +70,9 @@ public class Menu {
     public void aplicarDescuento(double porcentaje) {
         this.precio = this.precio * (1 - porcentaje / 100);
     }
-    
+    public boolean esAptoMenores() {
+        return !alcohol;
+    }
 
 }
 
