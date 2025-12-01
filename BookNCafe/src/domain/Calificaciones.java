@@ -102,5 +102,8 @@ public class Calificaciones {
         System.out.println("Suma de promedios: " + suma);
         System.out.println("Promedio general de todos los alumnos: " + promedioGeneral);
     }
+    public boolean productoAprobado() {
+        return promedioGeneral >= 5;
+    }
 }
 
