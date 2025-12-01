@@ -30,6 +30,8 @@ public class Reserva {
         this.cliente = cliente;
     }
 
-
+    public boolean esHoy() {
+        return fecha.equals(LocalDate.now());
+    }
 }
 
