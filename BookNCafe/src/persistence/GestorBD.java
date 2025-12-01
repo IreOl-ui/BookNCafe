@@ -101,7 +101,7 @@ public class GestorBD {
 		
 		// Y finalmente crear nuevas tablas:
 		// -- Cliente
-		String createClientesTable = "CREATE TABLE IF NOT EXISTS clientes ("
+		String createClienteTable = "CREATE TABLE IF NOT EXISTS cliente ("
                 + "numero INT PRIMARY KEY, "
                 + "nombre VARCHAR(100), "
                 + "dni VARCHAR(10) UNIQUE, "
@@ -129,12 +129,12 @@ public class GestorBD {
 		// -- Reservas
 		String createReservasTable = "CREATE TABLE IF NOT EXISTS reservas ("
                 + "fecha DATE PRIMARY KEY, "
-                + "nombre_cliente VARCHAR(100), "
+                + "nombre VARCHAR(100), "
                 + "tipo_evento VARCHAR(100), "
-                + "FOREIGN KEY (nombre_cliente) REFERENCES clientes(nombre));";
+                + "FOREIGN KEY (nombre) REFERENCES cliente(nombre));";
 		
         try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
-        	stmt.executeUpdate(createClientesTable);
+        	stmt.executeUpdate(createClienteTable);
             stmt.executeUpdate(createMenuTable);
             stmt.executeUpdate(createCalificacionesConcursoTable);
             stmt.executeUpdate(createReservasTable);
