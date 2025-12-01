@@ -2,14 +2,9 @@ package gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.io.FileWriter;
+import java.io.IOException;
 
-
-
-
-/**Problemas:
- * 	No guarda los clientes
- * 
- */
 public class VentanaReservarSitio extends JFrame {
 
     private JTable tablaHorarios;
@@ -31,15 +26,12 @@ public class VentanaReservarSitio extends JFrame {
             modelo.addRow(new Object[]{hora + ":00", "Disponible"});
         }
 
-        // Crear la tabla
         tablaHorarios = new JTable(modelo);
         JScrollPane scroll = new JScrollPane(tablaHorarios);
 
-        // Crear el botón
         btnReservar = new JButton("Reservar horario");
         btnReservar.addActionListener(e -> reservar());
 
-        // Agregar los componentes al JFrame
         add(scroll, "Center");
         add(btnReservar, "South");
     }
@@ -61,6 +53,22 @@ public class VentanaReservarSitio extends JFrame {
         String nombre = JOptionPane.showInputDialog(this, "Nombre del cliente:");
         if (nombre != null && !nombre.trim().isEmpty()) {
             modelo.setValueAt(nombre, fila, 1);
+
+            // Obtener la hora
+            String hora = (String) modelo.getValueAt(fila, 0);
+
+            // Guardar en CSV
+            guardarReservaEnCSV(hora, nombre);
+
+            JOptionPane.showMessageDialog(this, "Reserva guardada.");
+        }
+    }
+
+    private void guardarReservaEnCSV(String hora, String nombre) {
+        try (FileWriter fw = new FileWriter("reservas.csv", true)) {
+            fw.write(hora + "," + nombre + "\n");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar en el archivo CSV.");
         }
     }
 }
