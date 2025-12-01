@@ -81,6 +81,26 @@ public class Calificaciones {
     private void calcularPromedio() {
         this.promedioGeneral = (creatividad + material + tecnica) / 3;
     }
+    public static double sumaPromedios(Calificaciones[] alumnos, int index) {
+        if (index < 0) {
+            return 0; 
+        }
+        
+        return alumnos[index].getPromedioGeneral() + sumaPromedios(alumnos, index - 1);
+    }
 
+    public static void main(String[] args) {
+        
+        Calificaciones[] alumnos = new Calificaciones[3];
+        alumnos[0] = new Calificaciones("Ana", "Gómez", "555-1234", 8.5, 9.0, 7.5);
+        alumnos[1] = new Calificaciones("Luis", "Pérez", "555-5678", 7.0, 6.5, 8.0);
+        alumnos[2] = new Calificaciones("Marta", "López", "555-9012", 9.0, 8.5, 9.5);
+
+        double suma = sumaPromedios(alumnos, alumnos.length - 1);
+        double promedioGeneral = suma / alumnos.length;
+
+        System.out.println("Suma de promedios: " + suma);
+        System.out.println("Promedio general de todos los alumnos: " + promedioGeneral);
+    }
 }
 
