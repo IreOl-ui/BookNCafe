@@ -2,7 +2,6 @@ package persistence;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,10 +10,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -54,21 +52,22 @@ public class GestorBD {
 		}
 	}
 	
-	// Borrar BBDD
+	// Borrar BD
 	private void borrarBD() {
 		if (Boolean.parseBoolean(properties.getProperty("deleteBBDD", "false"))) {
 			try {
 				Files.deleteIfExists(Paths.get(databaseFile));
 				log.info("Base de datos eliminada exitosamente.");
-			} catch (Exception e) {
+			} catch (IOException e) {
 				log.warning("Error al borrar la base de datos: " + e.getMessage());
+				log.log(Level.WARNING, "Error al borrar la base de datos: ", e);
 			}
 		} else {
 			log.info("La eliminación de la base de datos está desactivada.");
 		}
 	}
 	
-	// Crear BBDD si no existe
+	// Crear BD si no existe
 	private void crearBD() {
 		String url = properties.getProperty("connection");
 		
@@ -81,7 +80,7 @@ public class GestorBD {
 		}
 	}
 	
-    // Conectar a la BBDD
+    // Conectar a la BD
     private Connection connect() throws Exception {
         try {
             Class.forName(driverName);
@@ -92,7 +91,7 @@ public class GestorBD {
         }
     }
 	
-	// Crear tablas de BBDD
+	// Crear tablas de BD
 	public void crearTablasBD() {
 		// Primero borrar datos de bbdd
 		borrarBD();
@@ -151,7 +150,7 @@ public class GestorBD {
         }
 	}
 	
-	// Cargar BBDD
+	// Cargar BD
 	public void cargarBD() {
         cargarDatosDesdeCSV(CSV_CLIENTES, "clientes", true);
         cargarContrasenasClientes(); // Cargar las contraseñas después de los clientes
@@ -239,7 +238,7 @@ public class GestorBD {
         }
 	}
 	
-	// Realizar consultas de BBDD clientes y calificaciones
+	// Realizar consultas de BD clientes y calificaciones
 	public void realizarConsultas() {
         String consultaClientes = "SELECT * FROM clientes;";
         String consultaCalificaciones = "SELECT nombre, apellido, promedio_general FROM calificaciones_concurso ORDER BY promedio_general DESC LIMIT 10;";
