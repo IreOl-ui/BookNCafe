@@ -24,12 +24,12 @@ public class VentanaProductos extends JFrame {
 
         // Iterar sobre los productos cargados
         for (Producto producto : productos) {
-            String nombre = producto.getNombre(); // Obtiene el nombre del producto
-            String descripcion = producto.getDescripcion(); // Obtiene la descripción
-            double precio = producto.getPrecio(); // Obtiene el precio
-            Set<Alergeno> alergenos = producto.getAlergeno(); // Obtiene los alérgenos
+            String nombre = producto.getNombre(); // Conseguir el nombre del producto
+            String descripcion = producto.getDescripcion(); // Conseguir la descripción
+            double precio = producto.getPrecio(); // Conseguir el precio
+            Set<Alergeno> alergenos = producto.getAlergeno(); // Conseguir los alérgenos
 
-            // Verificar si el producto es una bebida para determinar si tiene alcohol
+            // Verificar si el producto es una bebida para saber si tiene alcohol
             boolean tieneAlcohol = false;
             if (producto instanceof Bebida) {
                 tieneAlcohol = ((Bebida) producto).isAlcohol();
@@ -41,7 +41,7 @@ public class VentanaProductos extends JFrame {
             productoPanel.setBackground(Color.WHITE);
         }
 
-        // Crear un JScrollPane para permitir desplazamiento
+        // Crear un JScrollPane para que se pueda mover
         JScrollPane scrollPane = new JScrollPane(panelProductos);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 

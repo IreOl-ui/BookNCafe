@@ -15,6 +15,7 @@ import domain.ContraCliente;
 public class GestionContraClientes {
     public static final Path ruta_archivo_clientes = Paths.get("resources", "data", "contraClientes.csv");
 
+    // Gestionar contraseñas clientes
     public GestionContraClientes() {
         try {
             Files.createDirectories(ruta_archivo_clientes.getParent());
@@ -28,11 +29,11 @@ public class GestionContraClientes {
         }
     }
 
+    // Guardar contraseñas clientes
     public void guardarContraCliente(ContraCliente cliente) {
         try (BufferedReader reader = new BufferedReader(new FileReader(ruta_archivo_clientes.toFile()))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
-                // Divide la línea en nombre y contraseña encriptada
                 String[] datos = linea.split(";");
                 if (datos.length == 2 && datos[0].equals(cliente.getNombre())) {
                     System.out.println("El cliente ya existe en el archivo.");
@@ -43,7 +44,6 @@ public class GestionContraClientes {
             System.out.println("Ha ocurrido un error al verificar si el cliente ya existe.");
             return;
         }
-
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta_archivo_clientes.toFile(), true))) {
             writer.write(cliente.toString());
             writer.newLine();
@@ -53,18 +53,19 @@ public class GestionContraClientes {
         }
     }
 
+    // Buscar contraseñas clientes
     public ContraCliente buscarClientePorNombre(String nombre) {
         try (BufferedReader reader = new BufferedReader(new FileReader(ruta_archivo_clientes.toFile()))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] datos = linea.split(";");
                 if (datos.length == 2 && datos[0].equals(nombre)) {
-                    return new ContraCliente(datos[0], datos[1]); // Recupera el cliente usando nombre y contraseña encriptada
+                    return new ContraCliente(datos[0], datos[1]);
                 }
             }
         } catch (IOException e) {
             System.out.println("Ha ocurrido un error al buscar el cliente.");
         }
-        return null; // Si no encuentra el cliente, retorna null
+        return null; // Si no encuentro cliente, simplemente devuelve null.
     }
 }

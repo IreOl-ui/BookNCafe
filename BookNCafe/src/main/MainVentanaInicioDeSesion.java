@@ -12,15 +12,16 @@ public class MainVentanaInicioDeSesion {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
         SwingUtilities.invokeLater(() -> {
-            // Crear y mostrar la ventana de inicio de sesión
+        	// Inicio de sesión
             VentanaInicioDeSesion ventanaInicioDeSesion = new VentanaInicioDeSesion();
-            String usuarioLogueado = ventanaInicioDeSesion.mostrar(); // Método que bloquea hasta obtener un usuario
+            String usuarioLogueado = ventanaInicioDeSesion.mostrar();
 
-            if (usuarioLogueado != null) { // Si hay usuario, buscar su cliente asociado
+            // Si usuario existe, busca su cliente asociado
+            if (usuarioLogueado != null) {
             	GestionClientes gestionClientes = new GestionClientes();
-                Cliente cliente = gestionClientes.obtenerClientePorNombre(usuarioLogueado); // Aquí se obtiene el cliente
+                Cliente cliente = gestionClientes.obtenerClientePorNombre(usuarioLogueado);
 
-                // Y después crear y mostrar la ventana principal
+                // Y después abre ventana principal
                 VentanaPrincipal ventanaPrincipal = new VentanaPrincipal(cliente);
                 ventanaPrincipal.setVisible(true);
             }

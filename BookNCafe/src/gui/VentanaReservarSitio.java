@@ -6,8 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class VentanaReservarSitio extends JFrame {
-
-    private JTable tablaHorarios;
+	
+	private static final long serialVersionUID = 1L;
+	
+	private JTable tablaHorarios;
     private DefaultTableModel modelo;
     private JButton btnReservar;
 

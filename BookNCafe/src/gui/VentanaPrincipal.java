@@ -1,8 +1,11 @@
 package gui;
 
 import javax.swing.*;
+
+import io.GestionParticipantes;
 import io.GestionProductos;
 import domain.Cliente;
+import domain.Participante;
 import domain.Perfil;
 import domain.Producto;
 
@@ -20,11 +23,10 @@ public class VentanaPrincipal extends JFrame {
     public VentanaPrincipal(Cliente cliente) {
         this.clienteActual = cliente;
 
-        setTitle("Bienvenid@, " + cliente.getNombre());
+        setTitle("¡Bienvenid@, " + cliente.getNombre() + "!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        // Mostrar una barra de progreso durante la carga
+        
         cargarConBarraDeProgreso(cliente);
     }
 
@@ -67,15 +69,15 @@ public class VentanaPrincipal extends JFrame {
         dialogoCarga.setVisible(true);
     }
 
-    private void inicializarVentanaPrincipal(List<Participante> participantes, Set<Producto> productos, Cliente cliente) {
-        // Crear el panel de fondo
+    private void inicializarVentanaPrincipal( List<Participante> participantes, Set<Producto> productos, Cliente cliente) {
         FondoPanel fondoPanel = new FondoPanel("resources/images/iconos/Fondo.jpeg");
         fondoPanel.setLayout(new BorderLayout());
-
-        // Panel superior para el logo y botones
+        
+        // JPanel
         JPanel panelSuperior = new JPanel(new BorderLayout());
         panelSuperior.setOpaque(false);
 
+        // JLabel
         JLabel bienvenida = new JLabel("¡Hola, " + cliente.getNombre() + "!");
         bienvenida.setFont(new Font("Arial", Font.BOLD, 24));
         bienvenida.setHorizontalAlignment(SwingConstants.CENTER);
@@ -85,27 +87,24 @@ public class VentanaPrincipal extends JFrame {
         bienvenida.setBackground(new Color(255, 255, 255, 128));
 
         panelSuperior.add(bienvenida, BorderLayout.NORTH);
-
-        // Panel derecho con botones
+        
         JPanel panelSuperiorDerecho = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelSuperiorDerecho.setBackground(Color.WHITE);
 
+        // JButton de compra y perfil
         JButton btnConcurso = crearBotonConIcono("resources/images/iconos/Trofeo.jpeg", "Concurso", 64, 64);
         btnConcurso.addActionListener(e -> new VentanaConcurso(participantes).setVisible(true));
-
-        JButton btnReservas = crearBotonConIcono("resources/images/iconos/Reservas.jpeg", "Reservas", 64, 64);
-        btnReservas.addActionListener(e -> new VentanaReserva().setVisible(true));
-
         JButton btnCompras = crearBotonConIcono("resources/images/iconos/Compra.jpeg", "Compras", 64, 64);
         btnCompras.addActionListener(e -> new VentanaCompra(productos).setVisible(true));
-
         JButton btnPerfil = crearBotonConIcono("resources/images/iconos/Perfil.jpeg", "Perfil", 64, 64);
         btnPerfil.addActionListener(e -> new VentanaPerfil(cliente, new Perfil(cliente.getNombre(), "resources/images/Perfiles/" + cliente.getNombre() + ".jpg", 100.0)).setVisible(true));
+        JButton btnReservas = crearBotonConIcono("resources/images/iconos/Reservas.jpeg", "Reservas", 64, 64);
+        btnReservas.addActionListener(e -> new VentanaReservarSitio().setVisible(true));
 
-        panelSuperiorDerecho.add(btnConcurso);
-        panelSuperiorDerecho.add(btnReservas);
         panelSuperiorDerecho.add(btnCompras);
         panelSuperiorDerecho.add(btnPerfil);
+        panelSuperiorDerecho.add(btnConcurso);
+        panelSuperiorDerecho.add(btnReservas);
 
         panelSuperior.add(panelSuperiorDerecho, BorderLayout.EAST);
         fondoPanel.add(panelSuperior, BorderLayout.NORTH);
@@ -120,6 +119,7 @@ public class VentanaPrincipal extends JFrame {
         Image imagenRedimensionada = iconoOriginal.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
 
+        // JButton
         JButton boton = new JButton(iconoRedimensionado);
         boton.setToolTipText(toolTip);
         boton.setFocusPainted(false);
