@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import domain.Producto;
+import io.HistorialPedidos;   // historial CSV
+import gui.VentanaTicket;    // ventana del ticket
 
 public class CarritoPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -41,22 +43,18 @@ public class CarritoPanel extends JPanel {
         productosTable.setFillsViewportHeight(true);
         productosTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        // Ajustar el ancho de las columnas
         ajustarAnchoColumnas();
 
         JScrollPane scrollPane = new JScrollPane(productosTable);
         add(scrollPane);
 
-        // Espacio vertical entre la tabla y el total
         add(Box.createVerticalStrut(10));
 
-        // Label para el total
         totalLabel = new JLabel("Total: 0.00€");
         totalLabel.setFont(new Font("Arial", Font.BOLD, 16));
         totalLabel.setAlignmentX(CENTER_ALIGNMENT);
         add(totalLabel);
 
-        // Botón de pagar
         pagarButton = new JButton("Pagar");
         pagarButton.setAlignmentX(CENTER_ALIGNMENT);
         pagarButton.setEnabled(false);
@@ -93,11 +91,10 @@ public class CarritoPanel extends JPanel {
     }
 
     private void realizarPago() {
-        // Crear el panel de entrada de datos
+
         JPanel panelPago = new JPanel();
         panelPago.setLayout(new BoxLayout(panelPago, BoxLayout.Y_AXIS));
 
-        // Crear y agregar los campos de entrada
         JTextField numeroTarjetaField = new JTextField(16);
         JTextField nombreTitularField = new JTextField(20);
         JTextField fechaVencimientoField = new JTextField(7);
@@ -118,7 +115,6 @@ public class CarritoPanel extends JPanel {
         panelPago.add(new JLabel("Código de seguridad (CVV):"));
         panelPago.add(codigoSeguridadField);
 
-        // Mostrar el cuadro de diálogo
         int resultado = JOptionPane.showConfirmDialog(
             this,
             panelPago,
@@ -127,42 +123,66 @@ public class CarritoPanel extends JPanel {
             JOptionPane.PLAIN_MESSAGE
         );
 
-        // Validar si el usuario presionó OK
         if (resultado == JOptionPane.OK_OPTION) {
+
             String numeroTarjeta = numeroTarjetaField.getText();
             String nombreTitular = nombreTitularField.getText();
             String fechaVencimiento = fechaVencimientoField.getText();
             String codigoSeguridad = codigoSeguridadField.getText();
 
-            // Validar los campos
             if (numeroTarjeta.isEmpty() || !esTarjetaValida(numeroTarjeta)) {
-                JOptionPane.showMessageDialog(this, "Número de tarjeta de crédito inválido. Por favor, inténtelo de nuevo.");
+                JOptionPane.showMessageDialog(this, "Número de tarjeta inválido.");
                 return;
             }
 
             if (nombreTitular.isEmpty() || fechaVencimiento.isEmpty() || codigoSeguridad.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
+                JOptionPane.showMessageDialog(this, "Complete todos los campos.");
                 return;
             }
 
-            // Confirmar el pago si todo es válido
+            // Copias para ticket e historial ANTES de vaciar
+            Map<Producto, Integer> carritoCopia = new HashMap<>(carrito);
+            double totalCopia = total;
+
             JOptionPane.showMessageDialog(this, "Pago realizado. Total: " + String.format("%.2f€", total));
 
-            // Reiniciar el carrito
+            // Guardar en historial de pedidos (CSV)
+            HistorialPedidos.guardarPedido(carritoCopia, totalCopia, nombreTitular);
+
+            // Preguntar si quiere ver el ticket
+            int verTicket = JOptionPane.showConfirmDialog(
+                this,
+                "¿Desea ver el ticket del pedido?",
+                "Ticket",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (verTicket == JOptionPane.YES_OPTION) {
+                // Abrir ventana de ticket con todos los datos del comprador
+                VentanaTicket ventana = new VentanaTicket(
+                        carritoCopia,
+                        totalCopia,
+                        nombreTitular,
+                        numeroTarjeta,
+                        fechaVencimiento
+                );
+                
+                ventana.setVisible(true);
+            }
+
+            // Reiniciar carrito
             carrito.clear();
             total = 0.0;
             actualizarListaProductos();
             actualizarTotal();
         }
     }
-    
-    // Verifica que el número de tarjeta tenga exactamente 16 dígitos
+
     private boolean esTarjetaValida(String numeroTarjeta) {
-        return numeroTarjeta != null && numeroTarjeta.matches("\\d{16}");
+        return numeroTarjeta.matches("\\d{16}");
     }
 
     private void ajustarAnchoColumnas() {
-    	// Ajustar el ancho de las columnas para que se adapten al contenido
         TableColumn columnProducto = productosTable.getColumnModel().getColumn(0);
         columnProducto.setPreferredWidth(200); 
 
@@ -172,4 +192,7 @@ public class CarritoPanel extends JPanel {
         TableColumn columnPrecio = productosTable.getColumnModel().getColumn(2);
         columnPrecio.setPreferredWidth(100);
     }
- }
+}
+
+
+

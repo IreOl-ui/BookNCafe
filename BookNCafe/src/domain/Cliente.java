@@ -41,5 +41,12 @@ public class Cliente {
 	public String toString() {
 		return nombre + ";" + dni + ";" + email + ";" + tlf + "]";
 	}
+	public Cliente(String nombre) {
+	    this.nombre = nombre;
+	    this.dni = "";
+	    this.email = "";
+	    this.tlf = "";
+	}
+
 	
 }
