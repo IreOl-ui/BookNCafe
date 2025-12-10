@@ -5,8 +5,8 @@ import java.awt.*;
 
 import domain.Libro;
 import domain.GestionLibros;
-import io.Tickets;
 import io.GestionReservasLibro;
+import io.GestionTickets;
 
 public class VentanaReservarLibro extends JFrame {
 
@@ -77,7 +77,7 @@ public class VentanaReservarLibro extends JFrame {
                 return;
             }
 
-            Tickets.guardarTicketReservaLibro(isbn, titulo, autor, nombreCliente);
+            GestionTickets.guardarTicketReservaLibro(isbn, titulo, autor, nombreCliente);
             JOptionPane.showMessageDialog(this, "Ticket generado.\nArchivo: ticket_reserva_libro.txt");
         });
 
