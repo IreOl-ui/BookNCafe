@@ -1,5 +1,7 @@
 package domain;
-
+/**
+ * Representa un libro dentro del sistema de la biblioteca/cafetería.
+ */
 public class Libro {
 	
 	    private String isbn;
