@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class GestorBD {
 	
-	private final String PROPERTIES_FILE = "resources/data/clientes.csv";
+	private final String PROPERTIES_FILE = "resources/config/app.properties";
 	private final String CSV_CALIFICACIONES_CONCURSO = "resources/data/calificacionesConcurso.csv";
 	private final String CSV_CLIENTES = "resources/data/clientes.csv";
 	private final String CSV_CONTRA_CLIENTES = "resources/data/contraClientes.csv";
@@ -45,8 +45,8 @@ public class GestorBD {
 
             // Cargar el driver SQLite
             Class.forName(driverName);
-        } catch (Exception ex) {
-            logger.warning(String.format("Error al cargar el driver de BBDD: %s", ex.getMessage()));
+        } catch (Exception e) {
+            logger.warning(String.format("Error al cargar el driver de BBDD: %s", e.getMessage()));
         }
     }
 
@@ -79,8 +79,8 @@ public class GestorBD {
     private void crearBaseDeDatos() {
         String url = properties.getProperty("connection");
 
-        try (Connection conn = DriverManager.getConnection(url)) {
-            if (conn != null) {
+        try (Connection con = DriverManager.getConnection(url)) {
+            if (con != null) {
                 logger.info("Conexión a la base de datos establecida.");
             }
         } catch (Exception e) {
@@ -90,47 +90,52 @@ public class GestorBD {
 
     // Crear las tablas de la base de datos
     public void crearTablas() {
-        // Eliminar la base de datos
+        // Eliminar la base de datos si existe cafeteria.db
         borrarBaseDeDatos();
         
-        // Crear la base de datos
+        // Volver a crear la base de datos
         crearBaseDeDatos();
     	
         // Tabla
         // -- Clientes
         String createClientesTable = "CREATE TABLE IF NOT EXISTS clientes ("
-                + "numero INT PRIMARY KEY, "
-                + "nombre VARCHAR(100), "
-                + "dni VARCHAR(10) UNIQUE, "
-                + "gmail VARCHAR(100), "
-                + "contrasena VARCHAR(100));";
+                + "numero INT PRIMARY KEY,"
+                + "nombre VARCHAR(100),"
+                + "dni VARCHAR(10) UNIQUE,"
+                + "gmail VARCHAR(100),"
+                + "contrasena VARCHAR(100)"
+                + ");";
         // -- Calificaciones
         String createCalificacionesConcursoTable = "CREATE TABLE IF NOT EXISTS calificacionesConcurso ("
-                + "nombre VARCHAR(100), "
-                + "apellido VARCHAR(100), "
-                + "telefono VARCHAR(15), "
-                + "creatividad FLOAT, "
-                + "material FLOAT, "
-                + "tecnica FLOAT, "
-                + "promedio_general FLOAT, "
-                + "PRIMARY KEY (telefono));";
+                + "nombre VARCHAR(100),"
+                + "apellido VARCHAR(100),"
+                + "telefono VARCHAR(15),"
+                + "creatividad FLOAT,"
+                + "material FLOAT,"
+                + "tecnica FLOAT,"
+                + "promedioGeneral FLOAT,"
+                + "PRIMARY KEY (telefono)"
+                + ");";
         // -- Menú
         String createMenuTable = "CREATE TABLE IF NOT EXISTS menu ("
-                + "tipo VARCHAR(50), "
-                + "nombre VARCHAR(100) PRIMARY KEY, "
-                + "personaje VARCHAR(100), "
-                + "precio DECIMAL(10, 2), "
-                + "descripcion TEXT, "
-                + "alergeno VARCHAR(200), "
-                + "alcohol VARCHAR(3));";
+                + "tipo VARCHAR(50),"
+                + "nombre VARCHAR(100) PRIMARY KEY,"
+                + "personaje VARCHAR(100),"
+                + "precio DECIMAL(10, 2),"
+                + "descripcion TEXT,"
+                + "alergeno VARCHAR(200),"
+                + "alcohol VARCHAR(3)"
+                + ");";
         // -- Reservas
         String createReservasTable = "CREATE TABLE IF NOT EXISTS reservas ("
-                + "fecha DATE PRIMARY KEY, "
-                + "nombre_cliente VARCHAR(100), "
-                + "tipo_evento VARCHAR(100), "
-                + "FOREIGN KEY (nombre_cliente) REFERENCES clientes(nombre));";
+                + "fecha DATE PRIMARY KEY,"
+                + "nombre_cliente VARCHAR(100),"
+                + "tipo_evento VARCHAR(100),"
+                + "FOREIGN KEY (nombre_cliente) REFERENCES clientes(nombre)"
+                + ");";
 
-        try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
+        try (Connection con = connect();
+        		Statement stmt = con.createStatement()) {
             stmt.executeUpdate(createClientesTable);
             stmt.executeUpdate(createCalificacionesConcursoTable);
             stmt.executeUpdate(createMenuTable);
@@ -170,10 +175,11 @@ public class GestorBD {
                     String nombreCliente = data[0];
                     String contrasena = data[1];
 
-                    try (Connection conn = connect(); PreparedStatement ps = conn.prepareStatement(sql)) {
-                        ps.setString(1, contrasena);
-                        ps.setString(2, nombreCliente);
-                        ps.executeUpdate();
+                    try (Connection con = connect();
+                    		PreparedStatement pstmt = con.prepareStatement(sql)) {
+                        pstmt.setString(1, contrasena);
+                        pstmt.setString(2, nombreCliente);
+                        pstmt.executeUpdate();
                     } catch (Exception e) {
                         logger.severe("Error al actualizar la contraseña para el cliente con nombre " + nombreCliente + ": " + e.getMessage());
                     }
@@ -222,11 +228,12 @@ public class GestorBD {
                     continue;
                 }
 
-                try (Connection conn = connect(); PreparedStatement ps = conn.prepareStatement(sql)) {
+                try (Connection con = connect();
+                		PreparedStatement pstmt = con.prepareStatement(sql)) {
                     for (int i = 0; i < data.length; i++) {
-                        ps.setString(i + 1, data[i]);
+                        pstmt.setString(i + 1, data[i]);
                     }
-                    ps.executeUpdate();
+                    pstmt.executeUpdate();
                 } catch (Exception e) {
                     logger.severe("Error al insertar los datos en la tabla " + tabla + ": " + e.getMessage());
                 }
@@ -238,10 +245,10 @@ public class GestorBD {
 
     // Actualizar promedio general de calificaciones
     public void actualizarPromedios() {
-        String updatePromedio = "UPDATE calificacionesConcurso "
-                + "SET promedioGeneral = (creatividad + material + tecnica) / 3;";
+        String updatePromedio = "UPDATE calificacionesConcurso " + "SET promedioGeneral = (creatividad + material + tecnica) / 3;";
 
-        try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
+        try (Connection con = connect();
+        		Statement stmt = con.createStatement()) {
             stmt.executeUpdate(updatePromedio);
         } catch (Exception e) {
             logger.severe("Error al actualizar los promedios: " + e.getMessage());
@@ -253,7 +260,8 @@ public class GestorBD {
         String consultaClientes = "SELECT * FROM clientes LIMIT 10;";
         String consultaCalificaciones = "SELECT nombre, apellido, promedioGeneral FROM calificacionesConcurso ORDER BY promedioGeneral DESC LIMIT 10;";
 
-        try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
+        try (Connection con = connect();
+        		Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery(consultaClientes);
             while (rs.next()) {
                 System.out.println("Cliente: " + rs.getString("nombre"));
@@ -269,11 +277,11 @@ public class GestorBD {
     }
     
     public static void main(String[] args) {
-        GestorBD gestor = new GestorBD();
-        gestor.crearTablas();
-        gestor.cargarDatos();
-        gestor.actualizarPromedios();
-        gestor.realizarConsultas();
+        GestorBD gestorBD = new GestorBD();
+        gestorBD.crearTablas();
+        gestorBD.cargarDatos();
+        gestorBD.actualizarPromedios();
+        gestorBD.realizarConsultas();
     }
 
 }
