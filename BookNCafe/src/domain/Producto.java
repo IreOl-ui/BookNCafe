@@ -82,4 +82,8 @@ public abstract class Producto {
 				&& Objects.equals(nombre, other.nombre) && Objects.equals(personaje, other.personaje)
 				&& Double.doubleToLongBits(precio) == Double.doubleToLongBits(other.precio);
 	}
+	public double getPrecioConIva() {
+	    return this.precio * 1.21;
+	}
+
 }
