@@ -6,6 +6,7 @@ public class Cliente {
 	private String dni;
 	private String email;
 	private String tlf;
+	private boolean vip = false;
 	public Cliente(String nombre, String dni, String email, String tlf) {
 		super();
 		this.nombre = nombre;
@@ -37,6 +38,13 @@ public class Cliente {
 	public void setTlf(String tlf) {
 		this.tlf = tlf;
 	}
+	public void setVip(boolean vip) {
+	    this.vip = vip;
+	}
+
+	public boolean isVip() {
+	    return vip;
+	}
 	@Override
 	public String toString() {
 		return nombre + ";" + dni + ";" + email + ";" + tlf + "]";
@@ -47,6 +55,12 @@ public class Cliente {
 	    this.email = "";
 	    this.tlf = "";
 	}
-
+	public String getNombreFormateado() {
+	    if (vip) {
+	        return "[VIP] " + nombre.toUpperCase();
+	    } else {
+	        return nombre;
+	    }
+	}
 	
 }
