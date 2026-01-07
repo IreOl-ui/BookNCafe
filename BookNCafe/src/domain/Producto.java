@@ -86,4 +86,14 @@ public abstract class Producto {
 	    return this.precio * 1.21;
 	}
 
+	public String getEtiquetaPrecio() {
+	    if (this.precio > 10.0) {
+	        return "CARO";
+	    } else if (this.precio > 5.0) {
+	        return "MEDIO";
+	    } else {
+	        return "ECONÓMICO";
+	    }
+	}
+	
 }
