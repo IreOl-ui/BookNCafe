@@ -128,7 +128,8 @@ public class GestorBD {
                 + ");";
         // -- Reservas
         String createReservasTable = "CREATE TABLE IF NOT EXISTS reservas ("
-                + "fecha DATE PRIMARY KEY,"
+        		+ "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "horario TEXT,"
                 + "nombre_cliente VARCHAR(100),"
                 + "tipo_evento VARCHAR(100),"
                 + "FOREIGN KEY (nombre_cliente) REFERENCES clientes(nombre)"
@@ -145,7 +146,7 @@ public class GestorBD {
             stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_nombre_cliente ON clientes(nombre);");
             stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_telefono ON calificacionesConcurso(telefono);");
             stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_nombre ON menu(nombre);");
-            stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_fecha ON reservas(fecha);");
+            stmt.executeUpdate("CREATE INDEX IF NOT EXISTS idx_horario ON reservas(horario);");
         } catch (Exception e) {
             logger.severe("Error al crear las tablas: " + e.getMessage());
         }
@@ -204,7 +205,7 @@ public class GestorBD {
                 sql = "INSERT INTO menu (tipo, nombre, personaje, precio, descripcion, alergeno, alcohol) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 break;
             case "reservas":
-                sql = "INSERT INTO reservas (fecha, nombre_cliente, tipo_evento) VALUES (?, ?, ?)";
+                sql = "INSERT INTO reservas (id, horario, nombre_cliente, tipo_evento) VALUES (?, ?, ?, ?)";
                 break;
             default:
                 logger.severe("Tabla no reconocida: " + tabla);
