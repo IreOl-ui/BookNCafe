@@ -128,7 +128,7 @@ public class GestorBD {
                 + ");";
         // -- Reservas
         String createReservasTable = "CREATE TABLE IF NOT EXISTS reservas ("
-        		+ "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        		+ "id INTEGER PRIMARY KEY,"
                 + "horario TEXT,"
                 + "nombre_cliente VARCHAR(100),"
                 + "tipo_evento VARCHAR(100),"
