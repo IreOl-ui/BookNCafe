@@ -197,7 +197,7 @@ public class GestorBD {
             case "clientes":
                 sql = "INSERT INTO clientes (numero, nombre, dni, gmail, contrasena) VALUES (?, ?, ?, ?, ?)";
                 break;
-            case "calificaciones_concurso":
+            case "calificacionesConcurso":
                 sql = "INSERT INTO calificacionesConcurso (nombre, apellido, telefono, creatividad, material, tecnica, promedioGeneral) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 break;
             case "menu":
