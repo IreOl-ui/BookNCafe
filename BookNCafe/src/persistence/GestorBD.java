@@ -128,9 +128,8 @@ public class GestorBD {
                 + ");";
         // -- Reservas
         String createReservasTable = "CREATE TABLE IF NOT EXISTS reservas ("
-        		+ "id INTEGER PRIMARY KEY,"
                 + "horario TEXT,"
-                + "nombre_cliente VARCHAR(100),"
+                + "nombre_cliente VARCHAR(100) PRIMARY KEY,"
                 + "tipo_evento VARCHAR(100),"
                 + "FOREIGN KEY (nombre_cliente) REFERENCES clientes(nombre)"
                 + ");";
@@ -205,7 +204,7 @@ public class GestorBD {
                 sql = "INSERT INTO menu (tipo, nombre, personaje, precio, descripcion, alergeno, alcohol) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 break;
             case "reservas":
-                sql = "INSERT INTO reservas (id, horario, nombre_cliente, tipo_evento) VALUES (?, ?, ?, ?)";
+                sql = "INSERT INTO reservas (horario, nombre_cliente, tipo_evento) VALUES (?, ?, ?)";
                 break;
             default:
                 logger.severe("Tabla no reconocida: " + tabla);
