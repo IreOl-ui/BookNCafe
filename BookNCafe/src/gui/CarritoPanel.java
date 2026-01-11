@@ -54,6 +54,21 @@ public class CarritoPanel extends JPanel {
         totalLabel.setFont(new Font("Arial", Font.BOLD, 16));
         totalLabel.setAlignmentX(CENTER_ALIGNMENT);
         add(totalLabel);
+        add(Box.createVerticalStrut(10));
+
+        JButton btnEliminar = new JButton("Eliminar seleccionado");
+        btnEliminar.setAlignmentX(CENTER_ALIGNMENT);
+        btnEliminar.addActionListener(e -> eliminarSeleccionado());
+        add(btnEliminar);
+
+        add(Box.createVerticalStrut(5));
+
+        JButton btnVaciar = new JButton("Vaciar carrito");
+        btnVaciar.setAlignmentX(CENTER_ALIGNMENT);
+        btnVaciar.addActionListener(e -> vaciarCarrito());
+        add(btnVaciar);
+
+        add(Box.createVerticalStrut(10));
 
         pagarButton = new JButton("Pagar");
         pagarButton.setAlignmentX(CENTER_ALIGNMENT);
@@ -199,6 +214,65 @@ public class CarritoPanel extends JPanel {
         TableColumn columnPrecio = productosTable.getColumnModel().getColumn(2);
         columnPrecio.setPreferredWidth(100);
     }
+    
+    private void vaciarCarrito() {
+        if (carrito.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El carrito ya está vacío.");
+            return;
+        }
+
+        int op = JOptionPane.showConfirmDialog(
+                this,
+                "¿Seguro que quieres vaciar el carrito?",
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (op == JOptionPane.YES_OPTION) {
+            carrito.clear();
+            total = 0.0;
+            actualizarListaProductos();
+            actualizarTotal();
+        }
+    }
+
+    private void eliminarSeleccionado() {
+        int fila = productosTable.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona un producto en la tabla.");
+            return;
+        }
+
+        String nombreSeleccionado = tableModel.getValueAt(fila, 0).toString();
+
+        Producto encontrado = null;
+        for (Producto p : carrito.keySet()) {
+            if (p.getNombre().equals(nombreSeleccionado)) {
+                encontrado = p;
+                break;
+            }
+        }
+
+        if (encontrado == null) {
+            JOptionPane.showMessageDialog(this, "No se encontró el producto.");
+            return;
+        }
+
+        int cantidad = carrito.get(encontrado);
+
+        if (cantidad > 1) {
+            carrito.put(encontrado, cantidad - 1);
+            total -= encontrado.getPrecio();
+        } else {
+            carrito.remove(encontrado);
+            total -= encontrado.getPrecio();
+        }
+
+        actualizarListaProductos();
+        actualizarTotal();
+    }
+
 }
 
 
