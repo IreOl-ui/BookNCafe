@@ -61,6 +61,13 @@ public class CarritoPanel extends JPanel {
         pagarButton.addActionListener(e -> realizarPago());
         add(Box.createVerticalStrut(10));
         add(pagarButton);
+        add(Box.createVerticalStrut(10));
+
+        JButton btnResumen = new JButton("Resumen ventas");
+        btnResumen.setAlignmentX(CENTER_ALIGNMENT);
+        btnResumen.addActionListener(e -> new VentanaResumenVentas().setVisible(true));
+        add(btnResumen);
+
     }
 
     public void agregarProducto(Producto producto) {
