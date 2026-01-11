@@ -29,7 +29,9 @@ public class CarritoPanel extends JPanel {
     private DefaultTableModel tableModel;
     private Map<Producto, Integer> carrito;
     private double total;
-    
+    private float descuento = 0f;
+    private String codigoDescuento = "";
+
     public CarritoPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createTitledBorder("Carrito de compras"));
@@ -55,6 +57,11 @@ public class CarritoPanel extends JPanel {
         totalLabel.setAlignmentX(CENTER_ALIGNMENT);
         add(totalLabel);
         add(Box.createVerticalStrut(10));
+        JButton btnDescuento = new JButton("Descuento");
+        btnDescuento.setAlignmentX(CENTER_ALIGNMENT);
+        btnDescuento.addActionListener(e -> pedirDescuento());
+        add(Box.createVerticalStrut(10));
+        add(btnDescuento);
 
         JButton btnEliminar = new JButton("Eliminar seleccionado");
         btnEliminar.setAlignmentX(CENTER_ALIGNMENT);
@@ -108,9 +115,19 @@ public class CarritoPanel extends JPanel {
     }
 
     private void actualizarTotal() {
-        totalLabel.setText(String.format("Total: %.2f€", total));
+        float totalFinal = (float) total - descuento;
+
+        if (totalFinal < 0) totalFinal = 0;
+
+        if (descuento > 0f) {
+            totalLabel.setText(String.format("Total: %.2f€ (%s)", totalFinal, codigoDescuento));
+        } else {
+            totalLabel.setText(String.format("Total: %.2f€", totalFinal));
+        }
+
         pagarButton.setEnabled(total > 0);
     }
+
 
     private void realizarPago() {
 
@@ -162,14 +179,19 @@ public class CarritoPanel extends JPanel {
                 return;
             }
 
-            // Copias para ticket e historial ANTES de vaciar
+            // Copia del carrito antes de vaciarlo (para historial y ticket)
             Map<Producto, Integer> carritoCopia = new HashMap<>(carrito);
-            double totalCopia = total;
 
-            JOptionPane.showMessageDialog(this, "Pago realizado. Total: " + String.format("%.2f€", total));
+            // Total con descuento (descuento en euros)
+            float totalFinal = (float) total - descuento;
+            if (totalFinal < 0) {
+                totalFinal = 0;
+            }
 
-            // Guardar en historial de pedidos (CSV)
-            HistorialPedidos.guardarPedido(carritoCopia, totalCopia, nombreTitular);
+            JOptionPane.showMessageDialog(this, "Pago realizado. Total: " + String.format("%.2f€", totalFinal));
+
+            // Guardar en historial con el total ya descontado
+            HistorialPedidos.guardarPedido(carritoCopia, (double) totalFinal, nombreTitular);
 
             // Preguntar si quiere ver el ticket
             int verTicket = JOptionPane.showConfirmDialog(
@@ -180,21 +202,22 @@ public class CarritoPanel extends JPanel {
             );
 
             if (verTicket == JOptionPane.YES_OPTION) {
-                // Abrir ventana de ticket con todos los datos del comprador
                 VentanaTicket ventana = new VentanaTicket(
-                        carritoCopia,
-                        totalCopia,
-                        nombreTitular,
-                        numeroTarjeta,
-                        fechaVencimiento
+                    carritoCopia,
+                    (double) totalFinal,
+                    nombreTitular,
+                    numeroTarjeta,
+                    fechaVencimiento
                 );
-                
                 ventana.setVisible(true);
             }
 
-            // Reiniciar carrito
+            // Reiniciar carrito y descuento
             carrito.clear();
             total = 0.0;
+            descuento = 0f;
+            codigoDescuento = "";
+
             actualizarListaProductos();
             actualizarTotal();
         }
@@ -270,6 +293,35 @@ public class CarritoPanel extends JPanel {
         }
 
         actualizarListaProductos();
+        actualizarTotal();
+    }
+    private void pedirDescuento() {
+        String cod = JOptionPane.showInputDialog(this, "Código: CAFE2 (2€), BOOK1 (1€), VIP5 (5€) o QUITAR");
+        if (cod == null) return;
+
+        cod = cod.trim().toUpperCase();
+
+        if (cod.equals("QUITAR")) {
+            descuento = 0f;
+            codigoDescuento = "";
+            actualizarTotal();
+            return;
+        }
+
+        if (cod.equals("CAFE2")) {
+            descuento = 2f;
+            codigoDescuento = "CAFE2 (-2€)";
+        } else if (cod.equals("BOOK1")) {
+            descuento = 1f;
+            codigoDescuento = "BOOK1 (-1€)";
+        } else if (cod.equals("VIP5")) {
+            descuento = 5f;
+            codigoDescuento = "VIP5 (-5€)";
+        } else {
+            JOptionPane.showMessageDialog(this, "Código no válido");
+            return;
+        }
+
         actualizarTotal();
     }
 
