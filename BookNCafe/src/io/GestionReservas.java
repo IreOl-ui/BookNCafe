@@ -15,7 +15,7 @@ public class GestionReservas {
     
     public static List<Reserva> cargarReservas() {
         List<Reserva> reservas = new ArrayList<>();
-
+//h
         try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO))) {
             String linea;
             while ((linea = br.readLine()) != null) {
