@@ -18,7 +18,7 @@ public class GestionClientes {
     public static final Path ruta_archivo_clientes = Paths.get("resources", "data", "clientes.csv");
     private List<Cliente> listaClientes;
 
-    // Gestionar clientes
+    // Gestionar clientes.
     public GestionClientes() {
         try {
             Files.createDirectories(ruta_archivo_clientes.getParent());
